@@ -7,6 +7,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeAndParkingBooking.Ser
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "officeandparkingbooking.client", "officeandparkingbooking.client\officeandparkingbooking.client.esproj", "{ACACA497-B052-4A15-BA62-039EC283C71B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{322829AE-B90B-4F90-892D-8D8E626F98E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4055998E-DA46-4E3C-986A-44008149D3C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{18A85B00-869B-44D0-9997-1A2F8D909409}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeAndParkingBooking.Data", "OfficeAndParkingBooking.Data\OfficeAndParkingBooking.Data.csproj", "{10149599-468D-4751-BB86-AE8E09BD2A34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeAndParkingBooking.Data.Models", "OfficeAndParkingBooking.Data.Models\OfficeAndParkingBooking.Data.Models.csproj", "{CA05037F-63C9-4758-A60C-068112D8F683}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeAndParkingBooking.DTOs", "OfficeAndParkingBooking.DTOs\OfficeAndParkingBooking.DTOs.csproj", "{7F817F7B-785D-4A73-A334-BAA35C358B4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeAndParkingBooking.Services", "OfficeAndParkingBooking.Services\OfficeAndParkingBooking.Services.csproj", "{7A6D1D00-C308-45E0-B116-FA09BCC4CF79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeAndParkingBooking.Services.Interfaces", "OfficeAndParkingBooking.Services.Interfaces\OfficeAndParkingBooking.Services.Interfaces.csproj", "{69A0F138-5BBC-427A-A19A-64DBF96EE3A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeAndParkingBooking.Services.Mapping", "OfficeAndParkingBooking.Services.Mapping\OfficeAndParkingBooking.Services.Mapping.csproj", "{DBBD3A68-3AE7-4194-B8C2-452B50489C14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,8 +41,39 @@ Global
 		{ACACA497-B052-4A15-BA62-039EC283C71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACACA497-B052-4A15-BA62-039EC283C71B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ACACA497-B052-4A15-BA62-039EC283C71B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{10149599-468D-4751-BB86-AE8E09BD2A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10149599-468D-4751-BB86-AE8E09BD2A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10149599-468D-4751-BB86-AE8E09BD2A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10149599-468D-4751-BB86-AE8E09BD2A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA05037F-63C9-4758-A60C-068112D8F683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA05037F-63C9-4758-A60C-068112D8F683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA05037F-63C9-4758-A60C-068112D8F683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA05037F-63C9-4758-A60C-068112D8F683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F817F7B-785D-4A73-A334-BAA35C358B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F817F7B-785D-4A73-A334-BAA35C358B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F817F7B-785D-4A73-A334-BAA35C358B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F817F7B-785D-4A73-A334-BAA35C358B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A6D1D00-C308-45E0-B116-FA09BCC4CF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A6D1D00-C308-45E0-B116-FA09BCC4CF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A6D1D00-C308-45E0-B116-FA09BCC4CF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6D1D00-C308-45E0-B116-FA09BCC4CF79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69A0F138-5BBC-427A-A19A-64DBF96EE3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A0F138-5BBC-427A-A19A-64DBF96EE3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A0F138-5BBC-427A-A19A-64DBF96EE3A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A0F138-5BBC-427A-A19A-64DBF96EE3A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBBD3A68-3AE7-4194-B8C2-452B50489C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBBD3A68-3AE7-4194-B8C2-452B50489C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBBD3A68-3AE7-4194-B8C2-452B50489C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBBD3A68-3AE7-4194-B8C2-452B50489C14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10149599-468D-4751-BB86-AE8E09BD2A34} = {322829AE-B90B-4F90-892D-8D8E626F98E2}
+		{CA05037F-63C9-4758-A60C-068112D8F683} = {322829AE-B90B-4F90-892D-8D8E626F98E2}
+		{7A6D1D00-C308-45E0-B116-FA09BCC4CF79} = {4055998E-DA46-4E3C-986A-44008149D3C8}
+		{69A0F138-5BBC-427A-A19A-64DBF96EE3A0} = {4055998E-DA46-4E3C-986A-44008149D3C8}
+		{DBBD3A68-3AE7-4194-B8C2-452B50489C14} = {4055998E-DA46-4E3C-986A-44008149D3C8}
 	EndGlobalSection
 EndGlobal
