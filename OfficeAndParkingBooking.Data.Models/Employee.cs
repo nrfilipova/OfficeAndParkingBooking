@@ -3,8 +3,9 @@
     using static Services.Common.GlobalConstants.EmployeeConstants;
 
     using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Identity;
 
-    public class Employee
+    public class Employee : IdentityUser
     {
         [Required]
         [StringLength(EmployeeNameMaxLenght)]

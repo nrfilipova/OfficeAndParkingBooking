@@ -4,8 +4,9 @@
     using Seeding;
 
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-    public class OfficeAndParkingBookingDbContext : DbContext
+    public class OfficeAndParkingBookingDbContext : IdentityDbContext<Employee>
     {
         protected OfficeAndParkingBookingDbContext()
         {
@@ -26,6 +27,7 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new TeamConfiguration());
             modelBuilder.ApplyConfiguration(new RoomConfiguration());
             modelBuilder.ApplyConfiguration(new ParkingSpotConfiguration());

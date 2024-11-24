@@ -3,10 +3,12 @@
     using OfficeAndParkingBooking.DTOs;
     using Services.Interfaces;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class OfficeBookingController : ControllerBase
     {
         private readonly ILogger<ParkingBookingController> _logger;
