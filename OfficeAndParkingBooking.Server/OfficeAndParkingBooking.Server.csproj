@@ -7,6 +7,7 @@
     <SpaRoot>..\officeandparkingbooking.client</SpaRoot>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:57171</SpaProxyServerUrl>
+    <UserSecretsId>d2c647b8-a20c-49ac-a240-637915bafd8c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +25,10 @@
     <ProjectReference Include="..\officeandparkingbooking.client\officeandparkingbooking.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\OfficeAndParkingBooking.Data\OfficeAndParkingBooking.Data.csproj" />
+    <ProjectReference Include="..\OfficeAndParkingBooking.Services.Interfaces\OfficeAndParkingBooking.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\OfficeAndParkingBooking.Services.Mapping\OfficeAndParkingBooking.Services.Mapping.csproj" />
+    <ProjectReference Include="..\OfficeAndParkingBooking.Services\OfficeAndParkingBooking.Services.csproj" />
   </ItemGroup>
 
 </Project>

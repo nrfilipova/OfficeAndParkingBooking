@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OfficeAndParkingBooking.Data.Models\OfficeAndParkingBooking.Data.Models.csproj" />
+    <ProjectReference Include="..\OfficeAndParkingBooking.DTOs\OfficeAndParkingBooking.DTOs.csproj" />
+  </ItemGroup>
+
 </Project>
