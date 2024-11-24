@@ -6,11 +6,9 @@
 
     public class Employee
     {
-        [Key]
-        public int Id { get; set; }
-
+        [Required]
         [StringLength(EmployeeNameMaxLenght)]
-        public required string FullName { get; set; }
+        public string FullName { get; set; }
         public int? TeamId { get; set; }
         public Team Team { get; set; } = null!;
         public ICollection<OfficeBooking> OfficeBookings { get; set; } = new List<OfficeBooking>();

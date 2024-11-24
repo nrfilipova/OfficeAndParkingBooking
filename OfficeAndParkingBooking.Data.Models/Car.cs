@@ -13,7 +13,7 @@
         [StringLength(CarRegistrationPlateMaxLenght)]
         [RegularExpression(CarRegistrationPlatePattern)]
         public required string RegistrationPlate { get; set; }
-        public required int EmployeeId { get; set; }
+        public required string EmployeeId { get; set; }
         public Employee Employee { get; set; } = null!;
     }
 }

@@ -361,3 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/OfficeAndParkingBooking.Data/Migrations/20241124132044_CarRegistrationPlateConstraint.cs

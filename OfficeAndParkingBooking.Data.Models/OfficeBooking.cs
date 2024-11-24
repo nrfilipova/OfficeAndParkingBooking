@@ -10,7 +10,7 @@
         public string? Notes { get; set; }
         public int RoomId { get; set; }
         public Room Room { get; set; } = null!;
-        public required int EmployeeId { get; set; }
+        public required string EmployeeId { get; set; }
         public Employee Employees { get; set; } = null!;
     }
 }

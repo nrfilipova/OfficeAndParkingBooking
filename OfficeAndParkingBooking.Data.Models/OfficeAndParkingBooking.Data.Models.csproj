@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OfficeAndParkingBooking.Services.Constants\OfficeAndParkingBooking.Services.Common.csproj" />
+    <ProjectReference Include="..\OfficeAndParkingBooking.Services.Common\OfficeAndParkingBooking.Services.Common.csproj" />
   </ItemGroup>
 
 </Project>
