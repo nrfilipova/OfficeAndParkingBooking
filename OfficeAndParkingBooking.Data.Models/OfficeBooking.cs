@@ -6,7 +6,7 @@
     {
         [Key]
         public int Id { get; set; }
-        public required DateTime Date { get; set; }
+        public required DateOnly Date { get; set; }
         public string? Notes { get; set; }
         public int RoomId { get; set; }
         public Room Room { get; set; } = null!;

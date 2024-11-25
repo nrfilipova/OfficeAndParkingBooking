@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OfficeAndParkingBooking.Data;
 
@@ -11,9 +12,11 @@ using OfficeAndParkingBooking.Data;
 namespace OfficeAndParkingBooking.Data.Migrations
 {
     [DbContext(typeof(OfficeAndParkingBookingDbContext))]
-    partial class OfficeAndParkingBookingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241125142923_OfficeBookingDateCheckConstraint")]
+    partial class OfficeBookingDateCheckConstraint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
