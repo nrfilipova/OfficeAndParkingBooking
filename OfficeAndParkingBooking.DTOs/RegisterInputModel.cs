@@ -10,6 +10,11 @@
         [Required]
         [StringLength(EmployeeNameMaxLenght, MinimumLength = EmployeeNameMinLenght, ErrorMessage = RequiredErrorMessage)]
         public string FullName { get; set; } = string.Empty;
-        public string? TeamName { get; set; }
+        [Required]
+        public string TeamName { get; set; } = string.Empty;
+        [Required]
+        public string Email { get; set; } = string.Empty;
+        [Required]
+        public string Password { get; set; } = string.Empty;
     }
 }

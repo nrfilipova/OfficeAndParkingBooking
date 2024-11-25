@@ -5,28 +5,26 @@
     using Interfaces;
 
     using AutoMapper;
+    using Microsoft.EntityFrameworkCore;
 
     public class OfficeBookingService : IOfficeBookingService
     {
         private readonly IRepository _repository;
-        private readonly IEmployeeService _employeeService;
-        private readonly IRoomService _roomService;
         private readonly IMapper _mapper;
 
-        public OfficeBookingService(IRepository repository, IEmployeeService employeeService, IRoomService roomService, IMapper mapper)
+        public OfficeBookingService(IRepository repository,IMapper mapper)
         {
             _repository = repository;
-            _employeeService = employeeService;
-            _roomService = roomService;
             _mapper = mapper;
         }
 
         public async Task AddBookingAsync(OfficeBookingInputModel model)
         {
             var officeBooking = _mapper.Map<OfficeBooking>(model);
-            var employees = _employeeService.GetAllByName(model.EmployeeName).ToList();
-
-            //check the emp team if null add it if its changed 
+            var employee = _repository.AllAsQueryable<Employee>(x => x.Id == model.EmployeeId).Include(x => x.Team).FirstOrDefault();
+            var roomId = _repository.AllAsQueryable<Room>(x => x.Number == model.RoomNumber, false).Select(x => x.Id).FirstOrDefault();
+            var roomCapacity = _repository.AllAsQueryable<Room>(x => x.Id == roomId, false).Select(x => x.Capacity).FirstOrDefault();
+            var bookings = _repository.AllAsQueryable<OfficeBooking>(x => x.RoomId == roomId && x.Date == model.Date, false);
 
             if (officeBooking == null)
             {
@@ -34,32 +32,29 @@
                 throw new AutoMapperMappingException();
             }
 
-            if (employees.Count() == 0)
+            if (employee == null || roomId == 0)
             {
                 //TODO
                 throw new Exception();
             }
 
-            var roomId = _roomService.GetRoomId(model.RoomNumber);
-            var roomCapacity = _roomService.GetRoomCapacity(roomId);
-            var bookingsCount = GetBookingCount(roomId, model.Date);
+            if (bookings.Any(x => x.EmployeeId == model.EmployeeId && x.Date == model.Date))
+            {
+                //TODO
+                //cant book twice for the same day
+            }
 
-            if (roomId == 0 || bookingsCount + 1 > roomCapacity)
+            officeBooking.Employees = employee;
+            officeBooking.RoomId = roomId;
+
+            if (roomId == 0 || bookings.Count() + 1 > roomCapacity)
             {
                 //TODO
                 throw new Exception();
             }
 
-            //add the employee properties
             await _repository.AddAsync(officeBooking);
             await _repository.SaveChangesAsync();
-
-            return;
-        }
-
-        public int GetBookingCount(int roomId, DateTime date)
-        {
-            return _repository.AllAsQueryable<OfficeBooking>(x => x.RoomId == roomId && x.Date == date).Count();
         }
     }
 }

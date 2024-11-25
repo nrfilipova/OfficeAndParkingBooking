@@ -5,7 +5,5 @@
     public interface IOfficeBookingService
     {
         Task AddBookingAsync(OfficeBookingInputModel model);
-
-        int GetBookingCount(int roomId, DateTime date);
     }
 }

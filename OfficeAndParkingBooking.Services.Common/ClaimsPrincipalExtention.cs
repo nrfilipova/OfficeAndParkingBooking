@@ -5,6 +5,13 @@
     public static class ClaimsPrincipalExtention
     {
         public static string Id(this ClaimsPrincipal claimsPrincipal)
-            => claimsPrincipal.FindFirst(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
+        {
+            if (claimsPrincipal == null)
+            {
+                throw new ArgumentNullException(nameof(claimsPrincipal));
+            }
+
+            return claimsPrincipal.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+        }
     }
 }

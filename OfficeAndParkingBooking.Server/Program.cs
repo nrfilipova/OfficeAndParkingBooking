@@ -6,7 +6,6 @@ using OfficeAndParkingBooking.Services.Mapping;
 
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,16 +43,12 @@ builder.Services.AddIdentityApiEndpoints<Employee>()
 builder.Services.AddDbContext<OfficeAndParkingBookingDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<OfficeAndParkingBookingDbContext>();
-
 builder.Services.AddScoped(typeof(IRepository), typeof(Repository));
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddTransient<IParkingBookingService, ParkingBookingService>();
-builder.Services.AddTransient<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<IOfficeBookingService, OfficeBookingService>();
-builder.Services.AddTransient<IRoomService, RoomService>();
 
 var app = builder.Build();
 

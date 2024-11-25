@@ -1,7 +1,8 @@
 ﻿namespace OfficeAndParkingBooking.Server.Controllers
 {
-    using OfficeAndParkingBooking.DTOs;
-    using OfficeAndParkingBooking.Services.Interfaces;
+    using DTOs;
+    using Services.Interfaces;
+    using Services.Common;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,9 @@
                 //TODO log error
                 return BadRequest(ModelState);
             }
+
+            string userId = User.Id();
+            model.EmployeeId = userId;
 
             try
             {

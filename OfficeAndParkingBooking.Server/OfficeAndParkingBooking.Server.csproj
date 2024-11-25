@@ -32,6 +32,7 @@
     <ProjectReference Include="..\officeandparkingbooking.client\officeandparkingbooking.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\OfficeAndParkingBooking.Data.Models\OfficeAndParkingBooking.Data.Models.csproj" />
     <ProjectReference Include="..\OfficeAndParkingBooking.Data\OfficeAndParkingBooking.Data.csproj" />
     <ProjectReference Include="..\OfficeAndParkingBooking.Services.Interfaces\OfficeAndParkingBooking.Services.Interfaces.csproj" />
     <ProjectReference Include="..\OfficeAndParkingBooking.Services.Mapping\OfficeAndParkingBooking.Services.Mapping.csproj" />

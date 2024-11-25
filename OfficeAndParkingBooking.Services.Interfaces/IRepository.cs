@@ -10,6 +10,8 @@
 
         Task<T?> FindByIdAsync<T>(int id) where T : class;
 
+        Task<T?> FindByIdAsync<T>(string id) where T : class;
+
         Task AddAsync<T>(T entity) where T : class;
 
         void AddRange<T>(IEnumerable<T> entities) where T : class;

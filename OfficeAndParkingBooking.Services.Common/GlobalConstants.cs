@@ -9,6 +9,12 @@
             public const string CarRegistrationPlatePattern = @"^[A-Z]{1,2}[\d]{4}[A-Z]{2}$";
         }
 
+        public static class ParkingSpotConstants
+        {
+            public const int ParkingSpotStartId = 1;
+            public const int ParkingSpotEndId = 4;
+        }
+
         public static class TeamConstants
         {
             public const int TeamNameMinLenght = 2;

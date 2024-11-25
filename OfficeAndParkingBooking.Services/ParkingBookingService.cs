@@ -11,23 +11,21 @@
     public class ParkingBookingService : IParkingBookingService
     {
         private readonly IRepository _repository;
-        private readonly IEmployeeService _employeeService;
         private readonly IMapper _mapper;
 
-        public ParkingBookingService(IRepository repository, IEmployeeService employeeService, IMapper mapper)
+        public ParkingBookingService(IRepository repository, IMapper mapper)
         {
             _repository = repository;
-            _employeeService = employeeService;
             _mapper = mapper;
         }
-
-        //add reserve spot for a period of time
 
         public async Task AddBookingAsync(ParkingBookingInputModel model)
         {
             var booking = _mapper.Map<ParkingBooking>(model);
             var isAvailable = ParkingSpotAvailable(model.ParkingSpotId, model.Arrival);
-            var employee = _employeeService.GetAllByName(model.EmployeeName);
+            var employee = await _repository.FindByIdAsync<Employee>(model.EmployeeId);
+            var carToBook = await _repository.AllAsQueryable<Car>(x => x.RegistrationPlate == model.RegistrationPlate, false).FirstOrDefaultAsync();
+            var empCarsIds = await _repository.AllAsQueryable<Employee>(x => x.Id == model.EmployeeId, false).Include(x => x.Cars).SelectMany(x => x.Cars.Select(x => x.Id)).ToListAsync();
 
             if (booking == null)
             {
@@ -41,47 +39,28 @@
                 throw new Exception();
             }
 
-            var cars = await employee
-                .Include(x => x.Cars)
-                .SelectMany(x => x.Cars)
-                .ToListAsync();
+            if (model.Departure.CompareTo(model.Arrival) <= 0)
+            {
+                throw new Exception();
+            }
 
-            //move the logic to employee and car service
+            if (!isAvailable)
+            {
+                //TODO sorry its not available
+            }
 
-            if (!cars.Any(x => x.RegistrationPlate == model.RegistrationPlate))
+            if (!empCarsIds.Contains(carToBook.Id))
             {
                 //TODO
                 throw new Exception();
             }
 
-            if (!employee.Any(x => x.FullName == model.EmployeeName) && !cars.Any(x => x.RegistrationPlate == model.RegistrationPlate))
-            {
-
-                //TODO
-                throw new Exception();
-            }
-
-            if (model.Departure.CompareTo(model.Arrival) <= 0) 
-            {
-                throw new Exception();
-            }           
-
-            if (isAvailable && employee is null)
-            {
-                await _repository.AddAsync(booking);
-                await _repository.SaveChangesAsync();
-            }
-            else
-            {
-                //TODO
-                throw new Exception();
-            }
+            await _repository.AddAsync(booking);
+            await _repository.SaveChangesAsync();
         }
 
         private bool ParkingSpotAvailable(int parkingSpotId, DateTime arrival)
         {
-            //add extentions for the time
-
             var spot = _repository.AllAsQueryable<ParkingBooking>
                 (x => x.ParkingSpotId == parkingSpotId &&
                 x.Arrival.Date == arrival.Date)

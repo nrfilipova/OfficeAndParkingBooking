@@ -64,6 +64,9 @@
         public async Task<T?> FindByIdAsync<T>(int id) where T : class
             => await DbSet<T>().FindAsync(id);
 
+        public async Task<T?> FindByIdAsync<T>(string id) where T : class
+            => await DbSet<T>().FindAsync(id);
+
         public int SaveChanges()
             => _context.SaveChanges();
 
@@ -102,4 +105,3 @@
         }
     }
 }
-
