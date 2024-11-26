@@ -17,6 +17,14 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddAuthentication();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
@@ -71,6 +79,8 @@ app.UseHttpsRedirection();
 app.MapGroup("api/identity").MapIdentityApi<Employee>();
 
 app.UseAuthorization();
+
+app.UseCors("AllowAll");
 
 app.MapControllers();
 

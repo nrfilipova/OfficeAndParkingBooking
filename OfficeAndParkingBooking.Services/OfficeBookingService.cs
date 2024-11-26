@@ -18,6 +18,11 @@
             _mapper = mapper;
         }
 
+        public async Task<IEnumerable<OfficeBooking>> GetOfficeBookingsAsync()
+        {
+            return await _repository.AllAsync<OfficeBooking>(null, false);
+        }
+
         public async Task AddBookingAsync(OfficeBookingInputModel model)
         {
             var officeBooking = _mapper.Map<OfficeBooking>(model);

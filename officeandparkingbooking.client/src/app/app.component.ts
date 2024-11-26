@@ -1,37 +1,22 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+import { EmployeeService } from './employee.service';
+import { IOfficeBookingModel } from './officebookingmodel';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public forecasts: WeatherForecast[] = [];
+  title = 'grid';
+  public bookingData: IOfficeBookingModel[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private employeeService: EmployeeService) {}
 
   ngOnInit() {
-    this.getForecasts();
-  }
-
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
-      },
-      (error) => {
-        console.error(error);
+    this.employeeService.getEmployees().subscribe((model) => {
+        this.bookingData = model;
       }
     );
   }
-
-  title = 'officeandparkingbooking.client';
 }

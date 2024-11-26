@@ -6,6 +6,7 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using OfficeAndParkingBooking.Data.Models;
 
     [ApiController]
     [Route("[controller]")]
@@ -19,6 +20,13 @@
         {
             _logger = logger;
             _officeBookingService = officeBookingService;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IEnumerable<OfficeBooking>> GetAllEmployees()
+        {
+            return await _officeBookingService.GetOfficeBookingsAsync();
         }
 
         [HttpPost]
