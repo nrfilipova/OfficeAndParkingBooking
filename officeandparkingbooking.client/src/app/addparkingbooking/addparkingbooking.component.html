@@ -1,1 +1,101 @@
-<p>addparkingbooking works!</p>
+<div class="example-wrap">
+    <form class="k-form k-form-md" [formGroup]="form">
+      <fieldset class="k-form-fieldset">
+        <legend class="k-form-legend">Parking Booking Details</legend>
+
+        <kendo-formfield>
+          <kendo-label
+            labelCssClass="k-form-label"
+            for="arrival"
+            [optional]="false"
+            text="Arrival"
+          ></kendo-label>
+          <kendo-datepicker
+            #arrival
+            required
+            formControlName="arrival"
+          >
+          </kendo-datepicker>
+          
+          <kendo-formhint>Please select an arrival date</kendo-formhint>
+          <kendo-formerror>Error: Arrival date and time is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <kendo-label
+              labelCssClass="k-form-label"
+              for="departure"
+              [optional]="false"
+              text="Departure"
+            ></kendo-label>
+            <kendo-datepicker
+              #departure
+              required
+              formControlName="departure"
+            >
+            </kendo-datepicker>
+            
+            <kendo-formhint>Please select a departure date</kendo-formhint>
+            <kendo-formerror>Error: Departure date and time is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label
+            labelCssClass="k-form-label"
+            for="parkingSpot"
+            [optional]="false"
+            text="Parking Spot"
+          ></kendo-label>
+
+          <kendo-textbox
+            formControlName="parkingSpot"
+            #parkingSpot
+            required
+          ></kendo-textbox>
+
+          <kendo-formhint>Please select a parking spot</kendo-formhint>
+          <kendo-formerror>Error: Parking spot number is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <kendo-label
+              labelCssClass="k-form-label"
+              for="registrationPlate"
+              [optional]="false"
+              text="Registration Plate"
+            ></kendo-label>
+  
+            <kendo-textbox
+              formControlName="registrationPlate"
+              #registrationPlate
+              required
+            ></kendo-textbox>
+  
+            <kendo-formhint>Please select a car</kendo-formhint>
+            <kendo-formerror>Error: Registration plate is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <kendo-label
+              labelCssClass="k-form-label"
+              for="carModel"
+              text="Car Model"
+            ></kendo-label>
+  
+            <kendo-textbox
+              formControlName="carModel"
+              #registrationPlate
+            ></kendo-textbox>
+  
+            <kendo-formhint>Car model</kendo-formhint>
+        </kendo-formfield>
+
+        <div class="k-form-buttons">
+          <button kendoButton themeColor="primary" (click)="submitForm()">
+            Submit
+          </button>
+          <button kendoButton (click)="clearForm()">Clear</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>

@@ -1,92 +1,58 @@
-<!-- <div class="example-wrap">
-    <form class="k-form k-form-md" [formGroup]="">
+<div class="example-wrap">
+    <form class="k-form k-form-md" [formGroup]="form">
       <fieldset class="k-form-fieldset">
-        <legend class="k-form-legend">User Details</legend>
-        <kendo-formfield>
-          <kendo-label
-            labelCssClass="k-form-label"
-            [for]="firstName"
-            text="First Name"
-          ></kendo-label>
-          <kendo-textbox
-            formControlName="firstName"
-            #firstName
-            required
-          ></kendo-textbox>
-
-          <kendo-formhint>Your first name</kendo-formhint>
-          <kendo-formerror>Error: First name is required</kendo-formerror>
-        </kendo-formfield>
+        <legend class="k-form-legend">Office Booking Details</legend>
 
         <kendo-formfield>
           <kendo-label
             labelCssClass="k-form-label"
-            [for]="lastName"
-            text="Last Name"
-          ></kendo-label>
-          <kendo-textbox
-            formControlName="lastName"
-            #lastName
-            required
-          ></kendo-textbox>
-
-          <kendo-formhint>Your last name</kendo-formhint>
-          <kendo-formerror>Error: Last name is required</kendo-formerror>
-        </kendo-formfield>
-
-        <kendo-formfield>
-          <kendo-label
-            labelCssClass="k-form-label"
-            [for]="birthDate"
-            [optional]="true"
-            text="Birth Date"
+            for="date"
+            [optional]="false"
+            text="Date"
           ></kendo-label>
           <kendo-datepicker
-            #birthDate
-            formControlName="birthDate"
-            [min]="min"
-            [max]="max"
+            #date
+            required
+            formControlName="date"
           >
           </kendo-datepicker>
-
-          <kendo-formhint>Your birth date</kendo-formhint>
+          
+          <kendo-formhint>Please select a date</kendo-formhint>
+          <kendo-formerror>Error: Date is required</kendo-formerror>
         </kendo-formfield>
 
         <kendo-formfield>
           <kendo-label
             labelCssClass="k-form-label"
-            [for]="email"
-            text="Email"
+            for="room"
+            text="Room"
+            [optional]="false"
           ></kendo-label>
+
           <kendo-textbox
-            formControlName="email"
-            #email
+            formControlName="room"
+            #room
             required
           ></kendo-textbox>
 
-          <kendo-formhint>Your active email</kendo-formhint>
-          <kendo-formerror>Error: Not valid email format</kendo-formerror>
+          <kendo-formhint>Please select a room</kendo-formhint>
+          <kendo-formerror>Error: Room number is required</kendo-formerror>
         </kendo-formfield>
 
         <kendo-formfield>
-          <div class="k-checkbox-wrap">
-            <input
-              #acceptNews
-              type="checkbox"
-              kendoCheckBox
-              formControlName="acceptNews"
-            />
-            <kendo-label
-              [for]="acceptNews"
-              class="k-checkbox-label"
-              text="I want to receive notifications"
-            ></kendo-label>
-          </div>
+          <kendo-label
+            labelCssClass="k-form-label"
+            for="notes"
+            [optional]="true"
+            text="Notes"
+          ></kendo-label>
 
-          <kendo-formhint
-            >You will receive our latest updates and promotions on your
-            email</kendo-formhint
-          >
+          <kendo-textbox
+            formControlName="notes"
+            #notes
+          ></kendo-textbox>
+
+          <kendo-formhint>Add notes</kendo-formhint>
         </kendo-formfield>
 
         <div class="k-form-buttons">
@@ -97,4 +63,4 @@
         </div>
       </fieldset>
     </form>
-  </div> -->
+  </div>

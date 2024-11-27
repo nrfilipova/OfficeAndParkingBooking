@@ -1,13 +1,11 @@
 export class AddOfficeBookingModel {
-    fullName: string;
-    teamName: string;
-    email: string;
-    password: string;
+    date: Date;
+    room: number;
+    notes?: string;
 
-    constructor(fullName: string, teamName: string, email: string, password: string){
-      this.fullName = fullName;
-      this.teamName = teamName;
-      this.email = email;
-      this.password = password;
+    constructor(date: Date, room: number, notes?: string){
+      this.date = date;
+      this.room = room;
+      this.notes = notes;
     }
   }

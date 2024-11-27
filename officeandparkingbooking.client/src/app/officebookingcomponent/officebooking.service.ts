@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IOfficeBookingModel } from './officebookingmodel';
 
 @Injectable({
@@ -11,7 +11,15 @@ export class OfficeBookingService {
   
   private apiUrl = 'https://localhost:7014/OfficeBooking';
 
+  
   getOfficeBookings(): Observable<IOfficeBookingModel[]> {
-    return this.http.get<IOfficeBookingModel[]>(this.apiUrl);
+    return this.http.get<IOfficeBookingModel[]>(this.apiUrl).pipe(
+      map((data) => 
+        data.map((item) => ({
+          ...item,
+          date: new Date(item.date)
+        }))
+      )
+    );
   }
 }

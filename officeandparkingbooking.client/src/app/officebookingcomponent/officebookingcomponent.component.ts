@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OfficeBookingService } from './officebooking.service';
 import { IOfficeBookingModel } from './officebookingmodel';
-import { FormatSettings } from "@progress/kendo-angular-dateinputs";
 
 @Component({
   selector: 'app-officebookingcomponent',
@@ -10,14 +9,14 @@ import { FormatSettings } from "@progress/kendo-angular-dateinputs";
 })
 export class OfficeBookingcomponentComponent implements OnInit {
   public officeBookingData: IOfficeBookingModel[] = [];
-
+  
   constructor(
     private officeBookingService: OfficeBookingService
   ) {}
 
   ngOnInit() {
     this.officeBookingService.getOfficeBookings().subscribe((model) => {
-        this.officeBookingData = model;
+      this.officeBookingData = model;
       }
     );
   }

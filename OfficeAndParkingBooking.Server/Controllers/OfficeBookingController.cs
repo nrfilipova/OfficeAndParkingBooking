@@ -29,6 +29,7 @@
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateOfficeBooking(OfficeBookingInputModel model)
         {
             if (!ModelState.IsValid)

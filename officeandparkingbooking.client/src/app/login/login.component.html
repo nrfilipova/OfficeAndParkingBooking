@@ -1,0 +1,46 @@
+<div class="example-wrap">
+    <form class="k-form k-form-md" [formGroup]="form">
+      <fieldset class="k-form-fieldset">
+        <legend class="k-form-legend">LOGIN</legend>
+
+        <kendo-formfield>
+          <kendo-label
+            labelCssClass="k-form-label"
+            [for]="email"
+            text="Email"
+          ></kendo-label>
+          <kendo-textbox
+            formControlName="email"
+            #email
+            required
+          ></kendo-textbox>
+
+          <kendo-formhint>Your email</kendo-formhint>
+          <kendo-formerror>Error: Not valid email format</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label
+            labelCssClass="k-form-label"
+            [for]="password"
+            text="Password"
+          ></kendo-label>
+          <kendo-textbox
+            formControlName="password"
+            #password
+            required
+          ></kendo-textbox>
+
+          <kendo-formhint>Enter Password</kendo-formhint>
+          <kendo-formerror>Error: Password is not valid.</kendo-formerror>
+        </kendo-formfield>
+
+        <div class="k-form-buttons">
+          <button kendoButton themeColor="primary" (click)="submitForm()">
+            Submit
+          </button>
+          <button kendoButton (click)="clearForm()">Clear</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
