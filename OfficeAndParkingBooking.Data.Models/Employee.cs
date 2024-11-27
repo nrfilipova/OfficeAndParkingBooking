@@ -10,7 +10,8 @@
         [Required]
         [StringLength(EmployeeNameMaxLenght)]
         public string FullName { get; set; }
-        public int? TeamId { get; set; }
+        [Required]
+        public int TeamId { get; set; }
         public Team Team { get; set; } = null!;
         public ICollection<OfficeBooking> OfficeBookings { get; set; } = new List<OfficeBooking>();
         public ICollection<ParkingBooking> ParkingBookings { get; set; } = new List<ParkingBooking>();

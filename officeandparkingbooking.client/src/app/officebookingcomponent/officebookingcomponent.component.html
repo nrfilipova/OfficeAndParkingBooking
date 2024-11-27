@@ -1,0 +1,22 @@
+<kendo-grid
+  [kendoGridBinding]="officeBookingData"
+  [filterable]="true"
+>
+  <kendo-grid-column
+    field="id"
+    title="ID"
+    [width]="40"
+    [filterable]="false">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="employeeName" title="Name"></kendo-grid-column>
+
+  <kendo-grid-column field="employeeTeam" title="Team"></kendo-grid-column>
+
+  <kendo-grid-column field="date" title="Date" format="MM/dd/yyyy" filter="date"></kendo-grid-column>
+
+  <kendo-grid-column field="roomNumber" title="Room Number"></kendo-grid-column>
+
+  <kendo-grid-column field="notes" title="Notes" filter="text"></kendo-grid-column>
+
+</kendo-grid>

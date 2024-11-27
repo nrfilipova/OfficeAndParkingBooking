@@ -21,6 +21,13 @@
             _parkingService = carService;
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IEnumerable<ParkingBookingAllModel> GetAllEmployees()
+        {
+            return _parkingService.GetParkingBookingBookings();
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateParkingBooking(ParkingBookingInputModel model)
         {

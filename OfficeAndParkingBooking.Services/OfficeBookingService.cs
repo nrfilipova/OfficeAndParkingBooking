@@ -18,9 +18,16 @@
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<OfficeBooking>> GetOfficeBookingsAsync()
+        public IEnumerable<OfficeBookingAllModel> GetOfficeBookings()
         {
-            return await _repository.AllAsync<OfficeBooking>(null, false);
+            var bookings = _repository.AllAsQueryable<OfficeBooking>(null, false)
+                .Include(x => x.Room)
+                .Include(x => x.Employees)
+                .ThenInclude(x => x.Team)
+                .OrderByDescending(x => x.Date)
+                .ToList();
+
+            return _mapper.Map<IEnumerable<OfficeBookingAllModel>>(bookings);
         }
 
         public async Task AddBookingAsync(OfficeBookingInputModel model)

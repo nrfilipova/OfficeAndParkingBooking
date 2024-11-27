@@ -7,6 +7,7 @@
     using AutoMapper;
     using System;
     using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
 
     public class ParkingBookingService : IParkingBookingService
     {
@@ -17,6 +18,16 @@
         {
             _repository = repository;
             _mapper = mapper;
+        }
+
+        public IEnumerable<ParkingBookingAllModel> GetParkingBookingBookings()
+        {
+            var bookings = _repository.AllAsQueryable<ParkingBooking>(null, false)
+                .Include(x => x.Employees)
+                .OrderBy(x => x.Departure)
+                .ToList();
+
+            return _mapper.Map<IEnumerable<ParkingBookingAllModel>>(bookings);
         }
 
         public async Task AddBookingAsync(ParkingBookingInputModel model)

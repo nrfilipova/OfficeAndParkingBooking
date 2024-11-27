@@ -6,12 +6,12 @@ import { IOfficeBookingModel } from './officebookingmodel';
 @Injectable({
   providedIn: 'root'
 })
-export class EmployeeService {
+export class OfficeBookingService {
   constructor(private http: HttpClient) {}
   
   private apiUrl = 'https://localhost:7014/OfficeBooking';
 
-  getEmployees(): Observable<IOfficeBookingModel[]> {
+  getOfficeBookings(): Observable<IOfficeBookingModel[]> {
     return this.http.get<IOfficeBookingModel[]>(this.apiUrl);
   }
 }

@@ -1,9 +1,6 @@
-﻿<kendo-grid [data]="bookingData" [filterable]="true" [height]="350">
-  <kendo-grid-column field="BookingID" title="ID" [width]="40" [filterable]="false"></kendo-grid-column>
-
-  <kendo-grid-column field="date" title="Date" format="MM/dd/yyyy" filter="date"></kendo-grid-column>
-
-  <kendo-grid-column field="roomNumber" title="Room Number" filter="numeric"></kendo-grid-column>
-
-  <kendo-grid-column field="notes" title="Notes" filter="text"></kendo-grid-column>
-</kendo-grid>
+﻿<h1>BOOKING</h1>
+<nav>
+    <div class="btn"><a routerLink="/officebooking" routerLinkActive="active" ariaCurrentWhenActive="page">Office Booking </a></div>
+    <div class="btn"><a routerLink="/parkingbooking" routerLinkActive="active" ariaCurrentWhenActive="page">Parking Booking</a></div>
+</nav>
+<router-outlet></router-outlet>

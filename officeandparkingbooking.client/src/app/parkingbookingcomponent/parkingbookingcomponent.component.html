@@ -1,0 +1,20 @@
+<kendo-grid
+  [kendoGridBinding]="parkingBookingData"
+  [filterable]="true"
+>
+  <kendo-grid-column
+    field="id"
+    title="ID"
+    [width]="40"
+    [filterable]="false">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="employeeName" title="Name"></kendo-grid-column>
+
+  <kendo-grid-column field="arrival" title="Arrival" format="dd/MM/yyyy" filter="date"></kendo-grid-column>
+
+  <kendo-grid-column field="departure" title="Departure" format="MM/dd/yyyy" filter="date"></kendo-grid-column>
+
+  <kendo-grid-column field="parkingSpotNumber" title="Spot Number"></kendo-grid-column>
+
+</kendo-grid>
