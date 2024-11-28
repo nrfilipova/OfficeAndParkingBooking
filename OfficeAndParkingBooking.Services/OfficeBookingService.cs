@@ -30,10 +30,16 @@
             return _mapper.Map<IEnumerable<OfficeBookingAllModel>>(bookings);
         }
 
-        public async Task AddBookingAsync(OfficeBookingInputModel model)
+        public async Task<IEnumerable<RoomModel>> GetRooms()
+        {
+            var rooms = await _repository.AllAsync<Room>(null, false);
+            return _mapper.Map<IEnumerable<RoomModel>>(rooms);
+        }
+
+        public async Task AddBookingAsync(OfficeBookingInputModel model, string id)
         {
             var officeBooking = _mapper.Map<OfficeBooking>(model);
-            var employee = _repository.AllAsQueryable<Employee>(x => x.Id == model.EmployeeId).Include(x => x.Team).FirstOrDefault();
+            var employee = _repository.AllAsQueryable<Employee>(x => x.Id == id).Include(x => x.Team).FirstOrDefault();
             var roomId = _repository.AllAsQueryable<Room>(x => x.Number == model.RoomNumber, false).Select(x => x.Id).FirstOrDefault();
             var roomCapacity = _repository.AllAsQueryable<Room>(x => x.Id == roomId, false).Select(x => x.Capacity).FirstOrDefault();
             var bookings = _repository.AllAsQueryable<OfficeBooking>(x => x.RoomId == roomId && x.Date == model.Date, false);
@@ -50,7 +56,7 @@
                 throw new Exception();
             }
 
-            if (bookings.Any(x => x.EmployeeId == model.EmployeeId && x.Date == model.Date))
+            if (bookings.Any(x => x.EmployeeId == id && x.Date == model.Date))
             {
                 //TODO
                 //cant book twice for the same day

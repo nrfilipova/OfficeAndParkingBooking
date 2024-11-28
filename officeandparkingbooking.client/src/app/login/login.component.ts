@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login.service';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { LoginModel } from './login';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,20 @@ export class LoginComponent {
     private loginService: LoginService
   ) {}
 
-  onSubmit(): void{
+  onSubmit(): void {
     const formValues = this.form.value;
-    this.loginService.login(formValues).subscribe({ 
-      next: (response) => {
-      this.form.reset(); 
-    }});
-  };
+    this.loginService.login(formValues).subscribe({
+      next: (response: LoginModel) => {
+        if (response.accessToken) {
+          localStorage.setItem('accessToken', response.accessToken);
+        }
+        this.form.reset();
+      },
+      error: (err) => {
+        console.error('Login error:', err);
+      }
+    });
+  }
 
   public submitForm(): void {
     this.form.markAllAsTouched();

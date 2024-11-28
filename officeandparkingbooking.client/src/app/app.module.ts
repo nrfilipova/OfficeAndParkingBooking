@@ -13,7 +13,7 @@ import { AddOfficeBookingComponent } from './addofficebooking/addofficebooking.c
 import { AddParkingbookingComponent } from './addparkingbooking/addparkingbooking.component';
 import { LoginComponent } from './login/login.component';
 
-import {GridModule} from '@progress/kendo-angular-grid';
+import { GridModule } from '@progress/kendo-angular-grid';
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
 import { LabelModule } from "@progress/kendo-angular-label";
 import { InputsModule } from "@progress/kendo-angular-inputs";

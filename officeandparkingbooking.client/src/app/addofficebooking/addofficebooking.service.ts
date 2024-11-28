@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AddOfficeBookingModel } from './addofficebookingmodel';
 
@@ -12,7 +12,13 @@ export class AddOfficeBookingService {
   
   private apiUrl = 'https://localhost:7014/OfficeBooking';
 
+  
   postOfficeBookings(booking: AddOfficeBookingModel): Observable<AddOfficeBookingModel> {
-    return this.http.post<AddOfficeBookingModel>(this.apiUrl, booking);
+    const token = localStorage.getItem('accessToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    
+    return this.http.post<AddOfficeBookingModel>(this.apiUrl, booking, { headers });
   }
 }

@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { AddOfficeBookingService } from './addofficebooking.service';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { format } from "date-fns";
 
 @Component({
   selector: 'app-addofficebooking',
@@ -21,6 +22,7 @@ export class AddOfficeBookingComponent{
 
   onSubmit(): void{
     const formValues = this.form.value;
+    formValues.date = format(formValues.date, "yyyy-MM-dd");
     this.bookingService.postOfficeBookings(formValues).subscribe({ 
       next: (response) => {
       this.form.reset(); 

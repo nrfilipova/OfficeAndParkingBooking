@@ -29,7 +29,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateParkingBooking(ParkingBookingInputModel model)
+        public async Task<IActionResult> CreateParkingBooking([FromBody] ParkingBookingInputModel model)
         {
             if (!ModelState.IsValid)
             {

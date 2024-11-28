@@ -13,7 +13,6 @@
         public string? Notes { get; set; }
 
         [Required(ErrorMessage = RequiredErrorMessage)]
-        public int RoomNumber { get; set; }
-        public string EmployeeId { get; set; }
+        public string RoomNumber { get; set; }
     }
 }

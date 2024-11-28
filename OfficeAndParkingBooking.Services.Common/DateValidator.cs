@@ -9,13 +9,15 @@
         {
             if (value is DateOnly date)
             {
-                if (date <= DateOnly.FromDateTime(DateTime.UtcNow))
+                if (date.Day >= DateOnly.FromDateTime(DateTime.Now).Day &&
+                    date.Month == DateOnly.FromDateTime(DateTime.Now).Month &&
+                    date.Year == DateOnly.FromDateTime(DateTime.Now).Year)
                 {
                     return ValidationResult.Success;
                 }
             }
 
-            return new ValidationResult(ErrorMessage ?? "Date cannot be in the past");
+            return new ValidationResult(ErrorMessage ?? "Wrong date format");
         }
     }
 }

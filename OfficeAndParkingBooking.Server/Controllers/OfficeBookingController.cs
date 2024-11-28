@@ -23,14 +23,21 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public IEnumerable<OfficeBookingAllModel> GetAllEmployees()
+        public IEnumerable<OfficeBookingAllModel> GetAllOfficeBooking()
         {
             return _officeBookingService.GetOfficeBookings();
         }
 
-        [HttpPost]
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateOfficeBooking(OfficeBookingInputModel model)
+        public async Task<IEnumerable<RoomModel>> GetAllRooms()
+        {
+            return await _officeBookingService.GetRooms();
+        }
+
+        [HttpPost]
+        //[AllowAnonymous]
+        public async Task<IActionResult> CreateOfficeBooking([FromBody] OfficeBookingInputModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -38,12 +45,10 @@
                 return BadRequest(ModelState);
             }
 
-            string userId = User.Id();
-            model.EmployeeId = userId;
-
             try
             {
-                await _officeBookingService.AddBookingAsync(model);
+                string userId = User.Id();
+                await _officeBookingService.AddBookingAsync(model, userId);
             }
             catch (Exception)
             {

@@ -4,7 +4,8 @@
 
     public interface IOfficeBookingService
     {
-        Task AddBookingAsync(OfficeBookingInputModel model);
+        Task AddBookingAsync(OfficeBookingInputModel model, string id);
         IEnumerable<OfficeBookingAllModel> GetOfficeBookings();
+        Task<IEnumerable<RoomModel>> GetRooms();
     }
 }
