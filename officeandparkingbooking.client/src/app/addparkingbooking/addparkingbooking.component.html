@@ -41,20 +41,22 @@
 
         <kendo-formfield>
           <kendo-label
-            labelCssClass="k-form-label"
-            for="parkingSpot"
-            [optional]="false"
-            text="Parking Spot"
-          ></kendo-label>
+          labelCssClass="k-form-label"
+          for="spotId"
+          [optional]="false"
+          text="Parking Spot"
+        ></kendo-label>
 
-          <kendo-textbox
-            formControlName="parkingSpot"
-            #parkingSpot
-            required
-          ></kendo-textbox>
+        <kendo-dropdownlist 
+        [data]="spots"
+        [textField]="'number'"
+        [valueField]="'id'"
+        formControlName = "spotId"
+        [valuePrimitive]="true"
+        ></kendo-dropdownlist>
 
-          <kendo-formhint>Please select a parking spot</kendo-formhint>
-          <kendo-formerror>Error: Parking spot number is required</kendo-formerror>
+        <kendo-formhint>Please select a parking spot</kendo-formhint>
+        <kendo-formerror>Error: Parking spot number is required</kendo-formerror>
         </kendo-formfield>
 
         <kendo-formfield>

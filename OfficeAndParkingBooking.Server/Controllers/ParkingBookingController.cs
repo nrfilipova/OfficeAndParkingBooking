@@ -6,6 +6,7 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using OfficeAndParkingBooking.Services;
 
     [ApiController]
     [Route("[controller]")]
@@ -26,6 +27,15 @@
         public IEnumerable<ParkingBookingAllModel> GetAllEmployees()
         {
             return _parkingService.GetParkingBookingBookings();
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("/GetAllSpots")]
+        public async Task<IEnumerable<ParkingSpotsModel>> GetAllSpots()
+        {
+            return await _parkingService.GetSpots();
         }
 
         [HttpPost]

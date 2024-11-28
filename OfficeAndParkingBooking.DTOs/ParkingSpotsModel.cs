@@ -1,8 +1,8 @@
 ﻿namespace OfficeAndParkingBooking.DTOs
 {
-    public class RoomModel
+    public class ParkingSpotsModel
     {
         public int Id { get; set; }
-        public int Number { get; set; }
+        public required int Number { get; set; }
     }
 }

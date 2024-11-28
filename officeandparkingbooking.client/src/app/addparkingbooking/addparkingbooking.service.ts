@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AddParkingBookingModel} from './addparkingbookingmodel';
+import { ISpots } from './parkingspotmodel';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class AddParkingBookingService {
   constructor(private http: HttpClient) {}
   
   private apiUrl = 'https://localhost:7014/ParkingBooking';
+  private spotApiUrl = 'https://localhost:7014/GetAllSpots';
 
   postOfficeBookings(booking: AddParkingBookingModel): Observable<AddParkingBookingModel> {
     const token = localStorage.getItem('accessToken');
@@ -18,5 +20,9 @@ export class AddParkingBookingService {
     })
 
     return this.http.post<AddParkingBookingModel>(this.apiUrl, booking, { headers });
+  }
+
+  getSpots(): Observable<ISpots[]> {
+    return this.http.get<ISpots[]>(this.spotApiUrl);
   }
 }

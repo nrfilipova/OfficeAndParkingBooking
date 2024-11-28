@@ -1,11 +1,11 @@
 export class AddOfficeBookingModel {
     date: Date;
-    room: number;
+    roomId: number;
     notes?: string;
 
-    constructor(date: Date, room: number, notes?: string){
+    constructor(date: Date, roomId: number, notes?: string){
       this.date = date;
-      this.room = room;
+      this.roomId = roomId;
       this.notes = notes;
     }
   }

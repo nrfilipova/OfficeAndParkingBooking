@@ -39,40 +39,40 @@
         public async Task AddBookingAsync(OfficeBookingInputModel model, string id)
         {
             var officeBooking = _mapper.Map<OfficeBooking>(model);
-            var employee = _repository.AllAsQueryable<Employee>(x => x.Id == id).Include(x => x.Team).FirstOrDefault();
-            var roomId = _repository.AllAsQueryable<Room>(x => x.Number == model.RoomNumber, false).Select(x => x.Id).FirstOrDefault();
-            var roomCapacity = _repository.AllAsQueryable<Room>(x => x.Id == roomId, false).Select(x => x.Capacity).FirstOrDefault();
-            var bookings = _repository.AllAsQueryable<OfficeBooking>(x => x.RoomId == roomId && x.Date == model.Date, false);
+            //var employee = _repository.AllAsQueryable<Employee>(x => x.Id == id).Include(x => x.Team).FirstOrDefault();
+            //var roomId = _repository.AllAsQueryable<Room>(x => x.Number == model.RoomNumber, false).Select(x => x.Id).FirstOrDefault();
+            //var roomCapacity = _repository.AllAsQueryable<Room>(x => x.Id == roomId, false).Select(x => x.Capacity).FirstOrDefault();
+            //var bookings = _repository.AllAsQueryable<OfficeBooking>(x => x.RoomId == roomId && x.Date == model.Date, false);
 
-            if (officeBooking == null)
-            {
-                //TODO
-                throw new AutoMapperMappingException();
-            }
+            //if (officeBooking == null)
+            //{
+            //    //TODO
+            //    throw new AutoMapperMappingException();
+            //}
 
-            if (employee == null || roomId == 0)
-            {
-                //TODO
-                throw new Exception();
-            }
+            //if (employee == null || roomId == 0)
+            //{
+            //    //TODO
+            //    throw new Exception();
+            //}
 
-            if (bookings.Any(x => x.EmployeeId == id && x.Date == model.Date))
-            {
-                //TODO
-                //cant book twice for the same day
-            }
+            //if (bookings.Any(x => x.EmployeeId == id && x.Date == model.Date))
+            //{
+            //    //TODO
+            //    //cant book twice for the same day
+            //}
 
-            officeBooking.Employees = employee;
-            officeBooking.RoomId = roomId;
+            //officeBooking.Employees = employee;
+            //officeBooking.RoomId = roomId;
 
-            if (roomId == 0 || bookings.Count() + 1 > roomCapacity)
-            {
-                //TODO
-                throw new Exception();
-            }
+            //if (roomId == 0 || bookings.Count() + 1 > roomCapacity)
+            //{
+            //    //TODO
+            //    throw new Exception();
+            //}
 
-            await _repository.AddAsync(officeBooking);
-            await _repository.SaveChangesAsync();
+            //await _repository.AddAsync(officeBooking);
+            //await _repository.SaveChangesAsync();
         }
     }
 }

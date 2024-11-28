@@ -30,21 +30,16 @@
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("/GetAllRooms")]
         public async Task<IEnumerable<RoomModel>> GetAllRooms()
         {
             return await _officeBookingService.GetRooms();
         }
 
         [HttpPost]
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateOfficeBooking([FromBody] OfficeBookingInputModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                //TODO log error
-                return BadRequest(ModelState);
-            }
-
             try
             {
                 string userId = User.Id();

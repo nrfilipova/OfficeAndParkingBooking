@@ -18,7 +18,9 @@
                 .ReverseMap();
 
             CreateMap<OfficeBookingInputModel, OfficeBooking>();
-            CreateMap<RoomModel, Room>();
+
+            CreateMap<RoomModel, Room>().ReverseMap();
+            CreateMap<ParkingSpotsModel, ParkingSpot>().ReverseMap();
 
             CreateMap<OfficeBookingAllModel, OfficeBooking>()
                 .ForPath(dest => dest.Employees.FullName, opt => opt.MapFrom(x => x.EmployeeName))

@@ -23,17 +23,19 @@
 
         <kendo-formfield>
           <kendo-label
-            labelCssClass="k-form-label"
-            for="room"
-            text="Room"
-            [optional]="false"
-          ></kendo-label>
+          labelCssClass="k-form-label"
+          for="roomId"
+          [optional]="false"
+          text="Room"
+        ></kendo-label>
 
-          <kendo-textbox
-            formControlName="room"
-            #room
-            required
-          ></kendo-textbox>
+        <kendo-dropdownlist 
+        [data]="rooms"
+        [textField]="'number'"
+        [valueField]="'id'"
+        formControlName = "roomId"
+        [valuePrimitive]="true"
+        ></kendo-dropdownlist>
 
           <kendo-formhint>Please select a room</kendo-formhint>
           <kendo-formerror>Error: Room number is required</kendo-formerror>
