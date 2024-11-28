@@ -57,6 +57,7 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddTransient<IParkingBookingService, ParkingBookingService>();
 builder.Services.AddTransient<IOfficeBookingService, OfficeBookingService>();
+builder.Services.AddTransient<ICarService, CarService>();
 
 var app = builder.Build();
 

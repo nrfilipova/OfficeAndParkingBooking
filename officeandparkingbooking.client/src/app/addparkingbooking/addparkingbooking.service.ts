@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AddParkingBookingModel} from './addparkingbookingmodel';
 import { ISpots } from './parkingspotmodel';
+import { IRegistrationPlate } from './carregistrationplates';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AddParkingBookingService {
   constructor(private http: HttpClient) {}
   
   private apiUrl = 'https://localhost:7014/ParkingBooking';
-  private spotApiUrl = 'https://localhost:7014/GetAllSpots';
+  private spotApiUrl = 'https://localhost:7014/GetSpots';
+  private platespiUrl = 'https://localhost:7014/GetRegistrationPlates';
 
   postOfficeBookings(booking: AddParkingBookingModel): Observable<AddParkingBookingModel> {
     const token = localStorage.getItem('accessToken');
@@ -24,5 +26,9 @@ export class AddParkingBookingService {
 
   getSpots(): Observable<ISpots[]> {
     return this.http.get<ISpots[]>(this.spotApiUrl);
+  }
+
+  getPlates(): Observable<IRegistrationPlate[]> {
+    return this.http.get<IRegistrationPlate[]>(this.platespiUrl);
   }
 }

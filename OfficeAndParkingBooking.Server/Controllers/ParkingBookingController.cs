@@ -6,7 +6,6 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using OfficeAndParkingBooking.Services;
 
     [ApiController]
     [Route("[controller]")]
@@ -29,29 +28,14 @@
             return _parkingService.GetParkingBookingBookings();
         }
 
-
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("/GetAllSpots")]
-        public async Task<IEnumerable<ParkingSpotsModel>> GetAllSpots()
-        {
-            return await _parkingService.GetSpots();
-        }
-
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateParkingBooking([FromBody] ParkingBookingInputModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                //TODO log error
-                return BadRequest(ModelState);
-            }
-
-            string userId = User.Id();
-            model.EmployeeId = userId;
-
             try
             {
+                string userId = User.Id();
+                model.EmployeeId = userId;
                 await _parkingService.AddBookingAsync(model);
             }
             catch (Exception)

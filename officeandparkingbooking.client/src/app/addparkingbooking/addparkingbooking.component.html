@@ -60,21 +60,23 @@
         </kendo-formfield>
 
         <kendo-formfield>
-            <kendo-label
-              labelCssClass="k-form-label"
-              for="registrationPlate"
-              [optional]="false"
-              text="Registration Plate"
-            ></kendo-label>
-  
-            <kendo-textbox
-              formControlName="registrationPlate"
-              #registrationPlate
-              required
-            ></kendo-textbox>
-  
-            <kendo-formhint>Please select a car</kendo-formhint>
-            <kendo-formerror>Error: Registration plate is required</kendo-formerror>
+          <kendo-label
+          labelCssClass="k-form-label"
+          for="registrationPlateId"
+          [optional]="false"
+          text="Registration Plate"
+        ></kendo-label>
+
+        <kendo-dropdownlist 
+        [data]="plates"
+        [textField]="'number'"
+        [valueField]="'number'"
+        formControlName = "registrationPlateId"
+        [valuePrimitive]="true"
+        ></kendo-dropdownlist>
+
+        <kendo-formhint>Please select a car</kendo-formhint>
+        <kendo-formerror>Error: Registration plate is required</kendo-formerror>
         </kendo-formfield>
 
         <kendo-formfield>

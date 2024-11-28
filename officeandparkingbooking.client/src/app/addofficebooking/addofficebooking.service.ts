@@ -12,7 +12,7 @@ export class AddOfficeBookingService {
   constructor(private http: HttpClient) {}
   
   private apiUrl = 'https://localhost:7014/OfficeBooking';
-  private roomApiUrl = 'https://localhost:7014/GetAllRooms';
+  private roomApiUrl = 'https://localhost:7014/GetRooms';
   
   postOfficeBookings(booking: AddOfficeBookingModel): Observable<AddOfficeBookingModel> {
     const token = localStorage.getItem('accessToken');

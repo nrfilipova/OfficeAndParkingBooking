@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AddParkingBookingService } from './addparkingbooking.service';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ISpots } from './parkingspotmodel';
+import { IRegistrationPlate } from './carregistrationplates';
 
 @Component({
   selector: 'app-addparkingbooking',
@@ -14,11 +15,12 @@ export class AddParkingbookingComponent {
     arrival: new FormControl('', Validators.required),
     departure: new FormControl('', Validators.required),
     spotId: new FormControl(),
-    registrationPlate: new FormControl(),
+    registrationPlateId: new FormControl(),
     carModel: new FormControl(),
   });
   
   public spots: ISpots[] =[];
+  public plates: IRegistrationPlate[] =[];
 
   constructor(
     private bookingService: AddParkingBookingService
@@ -26,6 +28,7 @@ export class AddParkingbookingComponent {
 
   ngOnInit(): void{
     this.loadSpots();
+    this.loadPlates();
   }
 
   loadSpots(): void{
@@ -35,11 +38,19 @@ export class AddParkingbookingComponent {
     }});
   }
 
+  loadPlates(): void{
+    this.bookingService.getPlates().subscribe({ 
+      next: (data: IRegistrationPlate[]) => {
+        this.plates = data;
+    }});
+  }
+
   onSubmit(): void{
     const formValues = this.form.value;
     this.bookingService.postOfficeBookings(formValues).subscribe({ 
       next: (response) => {
       this.spots = this.spots;
+      this.plates = this.plates;
       this.form.reset(); 
     }});
   };

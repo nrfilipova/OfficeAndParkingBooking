@@ -30,14 +30,14 @@
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("/GetAllRooms")]
+        [Route("/GetRooms")]
         public async Task<IEnumerable<RoomModel>> GetAllRooms()
         {
             return await _officeBookingService.GetRooms();
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> CreateOfficeBooking([FromBody] OfficeBookingInputModel model)
         {
             try

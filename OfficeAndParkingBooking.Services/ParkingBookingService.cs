@@ -19,11 +19,6 @@
             _repository = repository;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<ParkingSpotsModel>> GetSpots()
-        {
-            var spots = await _repository.AllAsync<ParkingSpot>(null, false);
-            return _mapper.Map<IEnumerable<ParkingSpotsModel>>(spots);
-        }
 
         public IEnumerable<ParkingBookingAllModel> GetParkingBookingBookings()
         {

@@ -6,7 +6,5 @@
     {
         Task AddBookingAsync(ParkingBookingInputModel model);
         public IEnumerable<ParkingBookingAllModel> GetParkingBookingBookings();
-
-        Task<IEnumerable<ParkingSpotsModel>> GetSpots();
     }
 }
