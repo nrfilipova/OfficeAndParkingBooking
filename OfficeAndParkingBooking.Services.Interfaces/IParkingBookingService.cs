@@ -4,7 +4,7 @@
 
     public interface IParkingBookingService
     {
-        Task AddBookingAsync(ParkingBookingInputModel model);
-        public IEnumerable<ParkingBookingAllModel> GetParkingBookingBookings();
+        Task AddBookingAsync(ParkingBookingInputModel model, string id);
+        Task<IEnumerable<ParkingBookingAllModel>> GetParkingBookingBookingsAsync();
     }
 }

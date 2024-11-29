@@ -4,12 +4,10 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    public class RoomModel
+    public class CarModel
     {
         [Required(ErrorMessage = RequiredErrorMessage)]
         public int Id { get; set; }
-
-        [Required(ErrorMessage = RequiredErrorMessage)]
-        public int Number { get; set; }
+        public string? Name { get; set; }
     }
 }

@@ -1,13 +1,12 @@
-﻿
-namespace OfficeAndParkingBooking.Services
+﻿namespace OfficeAndParkingBooking.Services
 {
     using Data.Models;
     using DTOs;
     using Services.Interfaces;
 
     using AutoMapper;
-    using System.Collections.Generic;
     using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
 
     public class CarService : ICarService
     {
@@ -20,23 +19,16 @@ namespace OfficeAndParkingBooking.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<string?> GetCarModels(string id)
+        public async Task<IEnumerable<CarModel>> GetRegistrationPlatesAsync(string id)
         {
-            return _repository.AllAsQueryable<Employee>(x => x.Id == id, false)
-                .Include(x => x.Cars)
-                .SelectMany(x => x.Cars.Select(x => x.Model))
-                .ToList();
+            var plates = await _repository
+                .AllAsQueryable<Car>(x => x.EmployeeId == id, false)
+                .ToListAsync();
+
+            return _mapper.Map<IEnumerable<CarModel>>(plates);
         }
 
-        public IEnumerable<string> GetRegistrationPlates(string id)
-        {
-            return _repository.AllAsQueryable<Employee>(x => x.Id == id, false)
-                .Include(x => x.Cars)
-                .SelectMany(x => x.Cars.Select(x => x.RegistrationPlate))
-                .ToList();
-        }
-
-        public async Task<IEnumerable<ParkingSpotsModel>> GetSpots()
+        public async Task<IEnumerable<ParkingSpotsModel>> GetParkingSpotsAsync()
         {
             var spots = await _repository.AllAsync<ParkingSpot>(null, false);
             return _mapper.Map<IEnumerable<ParkingSpotsModel>>(spots);

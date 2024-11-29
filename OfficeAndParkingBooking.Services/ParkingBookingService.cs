@@ -5,8 +5,8 @@
     using Interfaces;
 
     using AutoMapper;
-    using System;
     using Microsoft.EntityFrameworkCore;
+    using System;
     using System.Collections.Generic;
 
     public class ParkingBookingService : IParkingBookingService
@@ -20,34 +20,29 @@
             _mapper = mapper;
         }
 
-        public IEnumerable<ParkingBookingAllModel> GetParkingBookingBookings()
+        public async Task<IEnumerable<ParkingBookingAllModel>> GetParkingBookingBookingsAsync()
         {
-            var bookings = _repository.AllAsQueryable<ParkingBooking>(null, false)
+            var bookings = await _repository.AllAsQueryable<ParkingBooking>(null, false)
                 .Include(x => x.Employees)
+                .Include(x => x.ParkingSpot)
                 .OrderBy(x => x.Departure)
-                .ToList();
+                .ToListAsync();
 
             return _mapper.Map<IEnumerable<ParkingBookingAllModel>>(bookings);
         }
 
-        public async Task AddBookingAsync(ParkingBookingInputModel model)
+        public async Task AddBookingAsync(ParkingBookingInputModel model, string id)
         {
             var booking = _mapper.Map<ParkingBooking>(model);
-            var isAvailable = ParkingSpotAvailable(model.ParkingSpotId, model.Arrival);
-            var employee = await _repository.FindByIdAsync<Employee>(model.EmployeeId);
-            var carToBook = await _repository.AllAsQueryable<Car>(x => x.RegistrationPlate == model.RegistrationPlate, false).FirstOrDefaultAsync();
-            var empCarsIds = await _repository.AllAsQueryable<Employee>(x => x.Id == model.EmployeeId, false).Include(x => x.Cars).SelectMany(x => x.Cars.Select(x => x.Id)).ToListAsync();
+            booking.EmployeeId = id;
+            var isAvailable = ParkingSpotAvailable(model.SpotId, model.Arrival);
+            //var carToBook = await _repository.AllAsQueryable<Car>(x => x.Id == model.RegistrationPlateId, false).Select(x => x.RegistrationPlate).FirstOrDefaultAsync();
+            //var empCarsIds = await _repository.AllAsQueryable<Employee>(x => x.Id == model.EmployeeId, false).Include(x => x.Cars).SelectMany(x => x.Cars.Select(x => x.Id)).ToListAsync();
 
             if (booking == null)
             {
                 //TODO
                 throw new AutoMapperMappingException();
-            }
-
-            if (employee == null)
-            {
-                //TODO
-                throw new Exception();
             }
 
             if (model.Departure.CompareTo(model.Arrival) <= 0)
@@ -60,11 +55,11 @@
                 //TODO sorry its not available
             }
 
-            if (!empCarsIds.Contains(carToBook.Id))
-            {
-                //TODO
-                throw new Exception();
-            }
+            //if (!empCarsIds.Contains(carToBook.Id))
+            //{
+            //    //TODO
+            //    throw new Exception();
+            //}
 
             await _repository.AddAsync(booking);
             await _repository.SaveChangesAsync();

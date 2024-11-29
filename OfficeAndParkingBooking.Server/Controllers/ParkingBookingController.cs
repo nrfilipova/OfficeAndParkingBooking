@@ -8,39 +8,34 @@
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("parkingBooking")]
     [Authorize]
     public class ParkingBookingController : ControllerBase
     {
-        private readonly ILogger<ParkingBookingController> _logger;
         private readonly IParkingBookingService _parkingService;
 
-        public ParkingBookingController(ILogger<ParkingBookingController> logger, IParkingBookingService carService)
+        public ParkingBookingController( IParkingBookingService carService)
         {
-            _logger = logger;
             _parkingService = carService;
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public IEnumerable<ParkingBookingAllModel> GetAllEmployees()
+        public async Task<IActionResult> GetAllEmployeesParkingBookingBookings()
         {
-            return _parkingService.GetParkingBookingBookings();
+            return Ok(await _parkingService.GetParkingBookingBookingsAsync());
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> CreateParkingBooking([FromBody] ParkingBookingInputModel model)
         {
             try
             {
                 string userId = User.Id();
-                model.EmployeeId = userId;
-                await _parkingService.AddBookingAsync(model);
+                await _parkingService.AddBookingAsync(model, userId);
             }
             catch (Exception)
             {
-                //add log and write error
                 return BadRequest();
             }
 

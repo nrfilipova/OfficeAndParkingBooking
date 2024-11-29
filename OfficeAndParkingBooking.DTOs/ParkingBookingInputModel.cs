@@ -8,11 +8,8 @@
 
     public class ParkingBookingInputModel
     {
-        public string EmployeeId { get; set; }
-        public string? CarModel { get; set; }
-
         [Required(ErrorMessage = RequiredErrorMessage)]
-        public string RegistrationPlate { get; set; }
+        public string RegistrationPlate { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredErrorMessage)]
         public DateTime Arrival { get; set; }
@@ -22,8 +19,7 @@
         [Required(ErrorMessage = RequiredErrorMessage)]
         public DateTime Departure { get; set; }
 
-        [Required(ErrorMessage = RequiredErrorMessage)]
         [Range(ParkingSpotStartId, ParkingSpotEndId)]
-        public int ParkingSpotId { get; set; }
+        public int SpotId { get; set; }
     }
 }

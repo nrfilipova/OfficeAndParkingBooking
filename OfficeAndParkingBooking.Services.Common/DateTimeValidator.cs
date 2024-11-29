@@ -20,8 +20,7 @@
 
             if (value == null || arrivalProp == null)
             {
-                //TODO add error
-                return new ValidationResult("");
+                return new ValidationResult("Arrival and departure dates are required");
             }
 
             var arrivalValue = arrivalProp.GetValue(validationContext.ObjectInstance);
@@ -29,14 +28,12 @@
             if (!DateTime.TryParse(value.ToString(), out departure) ||
                 !DateTime.TryParse(arrivalValue?.ToString(), out arrival))
             {
-                //TODO add error
-                return new ValidationResult("");
+                return new ValidationResult("Invalid date format");
             }
 
             if (departure.CompareTo(arrival) <= 0)
             {
-                //TODO add error
-                return new ValidationResult("");
+                return new ValidationResult("Departure cannot be before arrival");
             }
 
             return ValidationResult.Success;

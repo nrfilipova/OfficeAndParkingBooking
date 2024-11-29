@@ -7,14 +7,17 @@
 
     public class RegisterInputModel
     {
-        [Required]
+        [Required(ErrorMessage = RequiredErrorMessage)]
         [StringLength(EmployeeNameMaxLenght, MinimumLength = EmployeeNameMinLenght, ErrorMessage = RequiredErrorMessage)]
         public string FullName { get; set; } = string.Empty;
-        [Required]
+
+        [Required(ErrorMessage = RequiredErrorMessage)]
         public string TeamName { get; set; } = string.Empty;
-        [Required]
+
+        [Required(ErrorMessage = RequiredErrorMessage)]
         public string Email { get; set; } = string.Empty;
-        [Required]
+
+        [Required(ErrorMessage = RequiredErrorMessage)]
         public string Password { get; set; } = string.Empty;
     }
 }

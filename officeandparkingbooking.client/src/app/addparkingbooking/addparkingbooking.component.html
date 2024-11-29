@@ -10,12 +10,13 @@
             [optional]="false"
             text="Arrival"
           ></kendo-label>
-          <kendo-datepicker
-            #arrival
-            required
-            formControlName="arrival"
-          >
-          </kendo-datepicker>
+
+          <kendo-label>
+            <kendo-datetimepicker
+              [format]="'yyyy-MM-dd HH:mm'"
+              formControlName="arrival"
+            ></kendo-datetimepicker>
+          </kendo-label>
           
           <kendo-formhint>Please select an arrival date</kendo-formhint>
           <kendo-formerror>Error: Arrival date and time is required</kendo-formerror>
@@ -28,13 +29,14 @@
               [optional]="false"
               text="Departure"
             ></kendo-label>
-            <kendo-datepicker
-              #departure
-              required
-              formControlName="departure"
-            >
-            </kendo-datepicker>
-            
+
+            <kendo-label>
+              <kendo-datetimepicker
+                [format]="'yyyy-MM-dd HH:mm'"
+                formControlName="departure"
+              ></kendo-datetimepicker>
+            </kendo-label>
+
             <kendo-formhint>Please select a departure date</kendo-formhint>
             <kendo-formerror>Error: Departure date and time is required</kendo-formerror>
         </kendo-formfield>
@@ -62,36 +64,21 @@
         <kendo-formfield>
           <kendo-label
           labelCssClass="k-form-label"
-          for="registrationPlateId"
+          for="registrationPlate"
           [optional]="false"
           text="Registration Plate"
         ></kendo-label>
 
         <kendo-dropdownlist 
         [data]="plates"
-        [textField]="'number'"
-        [valueField]="'number'"
-        formControlName = "registrationPlateId"
+        [textField]="'name'"
+        [valueField]="'name'"
+        formControlName = "registrationPlate"
         [valuePrimitive]="true"
         ></kendo-dropdownlist>
 
         <kendo-formhint>Please select a car</kendo-formhint>
         <kendo-formerror>Error: Registration plate is required</kendo-formerror>
-        </kendo-formfield>
-
-        <kendo-formfield>
-            <kendo-label
-              labelCssClass="k-form-label"
-              for="carModel"
-              text="Car Model"
-            ></kendo-label>
-  
-            <kendo-textbox
-              formControlName="carModel"
-              #registrationPlate
-            ></kendo-textbox>
-  
-            <kendo-formhint>Car model</kendo-formhint>
         </kendo-formfield>
 
         <div class="k-form-buttons">

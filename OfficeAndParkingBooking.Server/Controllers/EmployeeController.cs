@@ -7,6 +7,7 @@
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
 
     [ApiController]
     [Route("api/identity/[controller]")]
@@ -26,7 +27,11 @@
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterInputModel model)
         {
-            var teamId = _repository.AllAsQueryable<Team>(x => x.Name == model.TeamName).Select(x => x.Id).FirstOrDefault();
+            var teamId = await _repository
+                .AllAsQueryable<Team>(x => x.Name == model.TeamName)
+                .Select(x => x.Id)
+                .FirstOrDefaultAsync();
+
             var user = _mapper.Map<Employee>(model);
 
             user.TeamId = teamId;

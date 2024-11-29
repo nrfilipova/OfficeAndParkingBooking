@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AddParkingBookingModel} from './addparkingbookingmodel';
 import { ISpots } from './parkingspotmodel';
-import { IRegistrationPlate } from './carregistrationplates';
+import { IRegistrationPlate } from './carregistrationplatesandmodels';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +11,15 @@ import { IRegistrationPlate } from './carregistrationplates';
 export class AddParkingBookingService {
   constructor(private http: HttpClient) {}
   
-  private apiUrl = 'https://localhost:7014/ParkingBooking';
-  private spotApiUrl = 'https://localhost:7014/GetSpots';
-  private platespiUrl = 'https://localhost:7014/GetRegistrationPlates';
+  private apiUrl = 'https://localhost:7014/parkingBooking';
+  private spotApiUrl = 'https://localhost:7014/spots';
+  private platesApiUrl = 'https://localhost:7014/registrationPlates';
 
   postOfficeBookings(booking: AddParkingBookingModel): Observable<AddParkingBookingModel> {
     const token = localStorage.getItem('accessToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     })
-
     return this.http.post<AddParkingBookingModel>(this.apiUrl, booking, { headers });
   }
 
@@ -29,6 +28,10 @@ export class AddParkingBookingService {
   }
 
   getPlates(): Observable<IRegistrationPlate[]> {
-    return this.http.get<IRegistrationPlate[]>(this.platespiUrl);
+    const token = localStorage.getItem('accessToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    })
+    return this.http.get<IRegistrationPlate[]>(this.platesApiUrl, { headers });
   }
 }

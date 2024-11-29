@@ -18,9 +18,9 @@
         public int RoomNumber { get; set; }
 
         [Required(ErrorMessage = RequiredErrorMessage)]
-        public string EmployeeName { get; set; }
+        public string EmployeeName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredErrorMessage)]
-        public string EmployeeTeam { get; set; }
+        public string EmployeeTeam { get; set; } = string.Empty;
     }
 }

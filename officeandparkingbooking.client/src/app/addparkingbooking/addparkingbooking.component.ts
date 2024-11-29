@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AddParkingBookingService } from './addparkingbooking.service';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ISpots } from './parkingspotmodel';
-import { IRegistrationPlate } from './carregistrationplates';
+import { IRegistrationPlate } from './carregistrationplatesandmodels';
 
 @Component({
   selector: 'app-addparkingbooking',
@@ -12,11 +12,10 @@ import { IRegistrationPlate } from './carregistrationplates';
 export class AddParkingbookingComponent {
 
   public form: FormGroup = new FormGroup({
-    arrival: new FormControl('', Validators.required),
-    departure: new FormControl('', Validators.required),
-    spotId: new FormControl(),
-    registrationPlateId: new FormControl(),
-    carModel: new FormControl(),
+    arrival: new FormControl(new Date(), Validators.required),
+    departure: new FormControl(new Date(), Validators.required),
+    spotId: new FormControl('', Validators.required),
+    registrationPlate: new FormControl('', Validators.required),
   });
   
   public spots: ISpots[] =[];

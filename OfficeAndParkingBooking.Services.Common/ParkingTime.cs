@@ -20,8 +20,7 @@
 
             if (value == null || arrivalProp == null)
             {
-                //TODO add error
-                return new ValidationResult("");
+                return new ValidationResult("Arrival and departure dates are required");
             }
 
             var arrivalValue = arrivalProp.GetValue(validationContext.ObjectInstance);
@@ -29,22 +28,19 @@
             if (!DateTime.TryParse(value.ToString(), out departure) ||
                 !DateTime.TryParse(arrivalValue?.ToString(), out arrival))
             {
-                //TODO add error
-                return new ValidationResult("");
+                return new ValidationResult("Invalid date format");
             }
 
             var endOfDay = new TimeSpan(23, 59, 59);
 
             if (departure < arrival.AddMinutes(15))
             {
-                //TODO add error
-                return new ValidationResult("");
+                return new ValidationResult("Departure must be at lest 15 min after arrival");
             }
 
             if (departure.TimeOfDay > endOfDay)
             {
-                //TODO add error
-                return new ValidationResult("");
+                return new ValidationResult("Departure must be the same day");
             }
 
             return ValidationResult.Success;

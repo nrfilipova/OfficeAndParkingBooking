@@ -4,8 +4,7 @@
 
     public interface ICarService
     {
-        Task<IEnumerable<ParkingSpotsModel>> GetSpots();
-        IEnumerable<string> GetRegistrationPlates(string id);
-        IEnumerable<string?> GetCarModels(string id);
+        Task<IEnumerable<ParkingSpotsModel>> GetParkingSpotsAsync();
+        Task<IEnumerable<CarModel>> GetRegistrationPlatesAsync(string id);
     }
 }

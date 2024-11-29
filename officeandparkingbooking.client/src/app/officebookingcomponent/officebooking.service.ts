@@ -9,7 +9,7 @@ import { IOfficeBookingModel } from './officebookingmodel';
 export class OfficeBookingService {
   constructor(private http: HttpClient) {}
   
-  private apiUrl = 'https://localhost:7014/OfficeBooking';
+  private apiUrl = 'https://localhost:7014/officeBooking';
   
   getOfficeBookings(): Observable<IOfficeBookingModel[]> {
     return this.http.get<IOfficeBookingModel[]>(this.apiUrl).pipe(

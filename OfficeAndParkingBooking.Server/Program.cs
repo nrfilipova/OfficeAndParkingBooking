@@ -6,13 +6,12 @@ using OfficeAndParkingBooking.Services.Mapping;
 
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddAuthentication();
@@ -64,7 +63,6 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -74,6 +72,25 @@ else
 {
     app.UseHsts();
 }
+
+app.UseExceptionHandler(x =>
+{
+    x.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+
+        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+        if (contextFeature is not null)
+        {
+            await context.Response.WriteAsJsonAsync(new
+            {
+                StatusCodes = context.Response.StatusCode,
+                Message = "Internal Server Error"
+            });
+        }
+    });
+});
 
 app.UseHttpsRedirection();
 

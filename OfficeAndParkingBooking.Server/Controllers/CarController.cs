@@ -1,7 +1,5 @@
 ﻿namespace OfficeAndParkingBooking.Server.Controllers
 {
-    using AutoMapper;
-    using DTOs;
     using Services.Common;
     using Services.Interfaces;
 
@@ -9,43 +7,31 @@
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("car")]
     [Authorize]
     public class CarController : ControllerBase
     {
-        private readonly IMapper _mapper;
         private readonly ICarService _carService;
 
-        public CarController(IMapper mapper, ICarService carService)
+        public CarController(ICarService carService)
         {
-            _mapper = mapper;
             _carService = carService;
         }
 
         [HttpGet]
-        [Route("/GetSpots")]
+        [Route("/spots")]
         [AllowAnonymous]
-        public async Task<IEnumerable<ParkingSpotsModel>> GetCarSpots()
+        public async Task<IActionResult> GetCarSpots()
         {
-            return await _carService.GetSpots();
+            return Ok(await _carService.GetParkingSpotsAsync());
         }
 
         [HttpGet]
-        [Route("/GetRegistrationPlates")]
-        [AllowAnonymous]
-        public IEnumerable<string> GetCarRegistrationPlates()
+        [Route("/registrationPlates")]
+        public async Task<IActionResult> GetCarRegistrationPlates()
         {
             string userId = User.Id();
-            return _carService.GetRegistrationPlates("userId");
-        }
-
-        [HttpGet]
-        [Route("/GetModels")]
-        [AllowAnonymous]
-        public IEnumerable<string?> GetCarModels()
-        {
-            string userId = User.Id();
-            return _carService.GetCarModels("userId");
+            return Ok(await _carService.GetRegistrationPlatesAsync(userId));
         }
     }
 }

@@ -9,7 +9,7 @@ import { IParkingeBookingModel } from './parkingbookingmodel';
 export class ParkingBookingService {
     constructor(private http: HttpClient) {}
     
-    private apiUrl = 'https://localhost:7014/ParkingBooking';
+    private apiUrl = 'https://localhost:7014/parkingBooking';
   
     getParkingBookings(): Observable<IParkingeBookingModel[]> {
       return this.http.get<IParkingeBookingModel[]>(this.apiUrl);

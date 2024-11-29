@@ -42,7 +42,8 @@ export class AddOfficeBookingComponent{
       next: (response) => {
       this.rooms = this.rooms;
       this.form.reset(); 
-    }});
+    }
+  });
   };
 
   public submitForm(): void {

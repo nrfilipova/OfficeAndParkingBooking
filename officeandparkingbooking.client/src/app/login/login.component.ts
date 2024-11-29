@@ -25,6 +25,7 @@ export class LoginComponent {
         if (response.accessToken) {
           localStorage.setItem('accessToken', response.accessToken);
         }
+        alert("You are logged in :)");
         this.form.reset();
       },
       error: (err) => {

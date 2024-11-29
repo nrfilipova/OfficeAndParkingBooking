@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{322829AE-B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4055998E-DA46-4E3C-986A-44008149D3C8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{18A85B00-869B-44D0-9997-1A2F8D909409}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeAndParkingBooking.Data", "OfficeAndParkingBooking.Data\OfficeAndParkingBooking.Data.csproj", "{10149599-468D-4751-BB86-AE8E09BD2A34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeAndParkingBooking.Data.Models", "OfficeAndParkingBooking.Data.Models\OfficeAndParkingBooking.Data.Models.csproj", "{CA05037F-63C9-4758-A60C-068112D8F683}"

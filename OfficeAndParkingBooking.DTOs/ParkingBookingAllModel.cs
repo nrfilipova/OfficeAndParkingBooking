@@ -19,6 +19,6 @@
         public int ParkingSpotNumber { get; set; }
 
         [Required(ErrorMessage = RequiredErrorMessage)]
-        public string EmployeeName { get; set; }
+        public string EmployeeName { get; set; } = string.Empty;
     }
 }

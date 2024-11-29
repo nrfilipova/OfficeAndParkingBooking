@@ -8,47 +8,52 @@
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("officeBooking")]
     [Authorize]
     public class OfficeBookingController : ControllerBase
     {
-        private readonly ILogger<ParkingBookingController> _logger;
         private readonly IOfficeBookingService _officeBookingService;
 
-        public OfficeBookingController(ILogger<ParkingBookingController> logger, IOfficeBookingService officeBookingService)
+        public OfficeBookingController(IOfficeBookingService officeBookingService)
         {
-            _logger = logger;
             _officeBookingService = officeBookingService;
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public IEnumerable<OfficeBookingAllModel> GetAllOfficeBooking()
+        public async Task<IActionResult> GetAllOfficeBooking()
         {
-            return _officeBookingService.GetOfficeBookings();
+            return Ok(await _officeBookingService.GetOfficeBookingsAsync());
         }
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("/GetRooms")]
-        public async Task<IEnumerable<RoomModel>> GetAllRooms()
+        [Route("/rooms")]
+        public async Task<IActionResult> GetAllRooms()
         {
-            return await _officeBookingService.GetRooms();
+            return Ok(await _officeBookingService.GetRoomsAsync());
         }
 
         [HttpPost]
-        //[AllowAnonymous]
         public async Task<IActionResult> CreateOfficeBooking([FromBody] OfficeBookingInputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             try
             {
                 string userId = User.Id();
                 await _officeBookingService.AddBookingAsync(model, userId);
             }
-            catch (Exception)
+            catch(ArgumentNullException ex)
             {
-                //add log and write error
-                return BadRequest();
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return Ok();
