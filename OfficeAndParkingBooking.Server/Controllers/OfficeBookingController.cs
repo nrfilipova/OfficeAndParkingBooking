@@ -6,6 +6,7 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Cors;
 
     [ApiController]
     [Route("officeBooking")]
@@ -47,11 +48,7 @@
                 string userId = User.Id();
                 await _officeBookingService.AddBookingAsync(model, userId);
             }
-            catch(ArgumentNullException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (InvalidOperationException ex)
+            catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }

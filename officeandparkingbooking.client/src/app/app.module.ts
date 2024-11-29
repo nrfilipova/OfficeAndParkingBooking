@@ -20,6 +20,7 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,7 @@ import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
     InputsModule,
     LabelModule,
     ButtonsModule,
-    DropDownsModule
+    DropDownsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

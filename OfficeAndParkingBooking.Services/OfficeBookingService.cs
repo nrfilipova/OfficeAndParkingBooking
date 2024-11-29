@@ -7,6 +7,7 @@
     using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging;
+    using OfficeAndParkingBooking.Services.Common;
 
     public class OfficeBookingService : IOfficeBookingService
     {
@@ -54,26 +55,16 @@
                     (x => x.RoomId == currentBooking.RoomId && x.Date == currentBooking.Date, false)
                 .ToListAsync();
 
-            if (currentBooking == null)
-            {
-                throw new ArgumentNullException(nameof(currentBooking));
-            }
-
-            if (bookingsForTheDay == null)
-            {
-                throw new ArgumentNullException(nameof(bookingsForTheDay));
-            }
-
             if (bookingsForTheDay.Any(x => x.EmployeeId == id && x.Date == model.Date))
             {
                 _logger.LogError($"OfficeBookingService/AddBookingAsync: User with {id} cant' book twice for the same day - {model.Date}");
-                throw new InvalidOperationException("Cant' book twice for the same day");
+                throw new Exception();
             }
 
             if (bookingsForTheDay.Count() + 1 > roomCapacity)
             {
                 _logger.LogError($"OfficeBookingService/AddBookingAsync: Room with id - {model.RoomId} capacity {roomCapacity} exceeded");
-                throw new InvalidOperationException("The capacity for this room is exceeded");
+                throw new Exception();
             }
 
             await _repository.AddAsync(currentBooking);
