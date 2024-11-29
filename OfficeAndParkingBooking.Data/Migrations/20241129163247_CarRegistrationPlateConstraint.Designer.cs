@@ -12,8 +12,8 @@ using OfficeAndParkingBooking.Data;
 namespace OfficeAndParkingBooking.Data.Migrations
 {
     [DbContext(typeof(OfficeAndParkingBookingDbContext))]
-    [Migration("20241127093131_TeamIdRequired")]
-    partial class TeamIdRequired
+    [Migration("20241129163247_CarRegistrationPlateConstraint")]
+    partial class CarRegistrationPlateConstraint
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

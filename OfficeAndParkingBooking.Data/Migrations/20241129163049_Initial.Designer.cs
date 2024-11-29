@@ -12,8 +12,8 @@ using OfficeAndParkingBooking.Data;
 namespace OfficeAndParkingBooking.Data.Migrations
 {
     [DbContext(typeof(OfficeAndParkingBookingDbContext))]
-    [Migration("20241125142923_OfficeBookingDateCheckConstraint")]
-    partial class OfficeBookingDateCheckConstraint
+    [Migration("20241129163049_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -235,7 +235,7 @@ namespace OfficeAndParkingBooking.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int>("TeamId")
                         .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -517,7 +517,9 @@ namespace OfficeAndParkingBooking.Data.Migrations
                 {
                     b.HasOne("OfficeAndParkingBooking.Data.Models.Team", "Team")
                         .WithMany("Employees")
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
                 });

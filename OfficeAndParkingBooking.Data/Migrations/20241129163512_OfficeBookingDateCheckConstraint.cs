@@ -5,20 +5,20 @@
 namespace OfficeAndParkingBooking.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class TeamNameConstraint : Migration
+    public partial class OfficeBookingDateCheckConstraint : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"ALTER TABLE Teams
-                ADD CONSTRAINT UC_TeamName UNIQUE (Name);");
+            migrationBuilder.Sql(@"ALTER TABLE OfficeBooking
+         ADD CONSTRAINT CHK_OfficeBookingDate CHECK (Date >= CAST(GETDATE() AS DATE));");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"ALTER TABLE Teams
-                DROP CONSTRAINT UC_TeamName;");
+            migrationBuilder.Sql(@"ALTER TABLE OfficeBooking
+         DROP CONSTRAINT CHK_OfficeBookingDate;");
         }
     }
 }
