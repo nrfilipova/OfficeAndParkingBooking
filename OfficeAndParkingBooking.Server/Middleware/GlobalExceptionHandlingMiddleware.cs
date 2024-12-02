@@ -27,12 +27,18 @@
                 var statusCode = ex switch
                 {
                     BookingTwiceException => StatusCodes.Status400BadRequest,
+                    InvalidOperationException => StatusCodes.Status400BadRequest,
                     CapacityExceededException => StatusCodes.Status400BadRequest,
                     ParkingSpotNotAvailableException => StatusCodes.Status400BadRequest,
                     ValidationException => StatusCodes.Status400BadRequest,
                     UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
                     _ => StatusCodes.Status500InternalServerError
                 };
+
+                _logger.LogError(ex, "An error occurred: {Message}", ex.Message);
+
+                context.Response.StatusCode = statusCode;
+                context.Response.ContentType = "application/json";
 
                 ProblemDetails details = new()
                 {
@@ -43,8 +49,6 @@
                 var json = JsonSerializer.Serialize(details);
 
                 await context.Response.WriteAsync(json);
-
-                context.Response.ContentType = "application/json";
             }
         }
     }

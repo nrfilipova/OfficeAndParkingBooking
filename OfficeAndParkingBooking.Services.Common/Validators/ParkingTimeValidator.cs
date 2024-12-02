@@ -33,12 +33,17 @@
 
             var endOfDay = new TimeSpan(23, 59, 59);
 
+            if (departure.CompareTo(DateTime.Now) <= 0 || arrival.CompareTo(DateTime.Now) <= 0)
+            {
+                return new ValidationResult("Booking day can't be in the past");
+            }
+
             if (departure < arrival.AddMinutes(15))
             {
                 return new ValidationResult("Departure must be at least 15 min after arrival");
             }
 
-            if (departure.TimeOfDay > endOfDay)
+            if (departure.TimeOfDay > endOfDay || departure.Day > arrival.Day)
             {
                 return new ValidationResult("Departure must be the same day");
             }

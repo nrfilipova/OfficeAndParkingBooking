@@ -21,6 +21,7 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
 import { GlobalErrorHandlerService } from './global-error-handler.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { GlobalErrorHandlerService } from './global-error-handler.service';
     LabelModule,
     ButtonsModule,
     DropDownsModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: ErrorHandler, useClass: GlobalErrorHandlerService}

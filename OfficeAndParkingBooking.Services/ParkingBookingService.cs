@@ -41,10 +41,22 @@
             booking.EmployeeId = id;
             var isAvailable = ParkingSpotAvailable(model.SpotId, model.Arrival);
 
+            var bookings = await _repository.AllAsQueryable<ParkingBooking>(x => x.Arrival.Day == model.Arrival.Day, false)
+                .Include(x => x.Employees)
+                .ThenInclude(x => x.Cars)
+                .Select(x => x.Employees.Cars.Where(x => x.RegistrationPlate == model.RegistrationPlate))
+                .FirstOrDefaultAsync();
+
             if (!isAvailable)
             {
                 _logger.LogError($"ParkingBookingService/AddBookingAsync: Spot with id - {model.SpotId} is not available for arrival - {model.Arrival}, departure: {model.Departure}");
                 throw new ParkingSpotNotAvailableException();
+            }
+
+            if (booking != null)
+            {
+                _logger.LogError($"ParkingBookingService/AddBookingAsync: Allready booked for this car {model.RegistrationPlate}.");
+                throw new InvalidOperationException();
             }
 
             await _repository.AddAsync(booking);
