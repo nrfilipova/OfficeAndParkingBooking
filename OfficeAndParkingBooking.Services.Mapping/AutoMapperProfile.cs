@@ -38,7 +38,7 @@
             CreateMap<RegisterInputModel, Employee>()
                 .ForPath(dest => dest.UserName, opt => opt.MapFrom(x => x.Email));
 
-            CreateMap<DropDownModel, Team>();
+            CreateMap<DropDownModel, Team>().ReverseMap();
         }
     }
 }
