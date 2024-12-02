@@ -10,21 +10,13 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddAuthentication();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", builder => builder
-    .WithOrigins("http://localhost:57171")
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
-});
+builder.Services.AddCors();
+
+builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -56,12 +48,12 @@ builder.Services.AddScoped(typeof(IRepository), typeof(Repository));
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
-builder.Services.AddLogging();
 builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
 builder.Services.AddTransient<IParkingBookingService, ParkingBookingService>();
 builder.Services.AddTransient<IOfficeBookingService, OfficeBookingService>();
 builder.Services.AddTransient<ICarService, CarService>();
+builder.Services.AddTransient<ITeamService, TeamService>();
 
 var app = builder.Build();
 
@@ -82,9 +74,14 @@ app.UseHttpsRedirection();
 
 app.MapGroup("api/identity").MapIdentityApi<Employee>();
 
-app.UseAuthorization();
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
 
-app.UseCors("AllowAll");
+app.UseAuthorization();
 
 app.MapControllers();
 

@@ -46,12 +46,14 @@ export class AddParkingbookingComponent {
 
   onSubmit(): void{
     const formValues = this.form.value;
-    this.bookingService.postOfficeBookings(formValues).subscribe({ 
-      next: (response) => {
-      this.spots = this.spots;
-      this.plates = this.plates;
-      this.form.reset(); 
-    }});
+      this.bookingService.postOfficeBookings(formValues).subscribe({ 
+        next: () => {
+        this.spots = this.spots;
+        this.plates = this.plates;
+        this.form.reset(); 
+        alert("Booking added successfully");
+      }
+    });
   };
 
   public submitForm(): void {

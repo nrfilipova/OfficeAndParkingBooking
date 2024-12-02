@@ -1,6 +1,6 @@
 ﻿namespace OfficeAndParkingBooking.DTOs
 {
-    using Services.Common;
+    using Services.Common.Validators;
     using static Services.Common.GlobalConstants.ErrorMessage;
 
     using System.ComponentModel.DataAnnotations;

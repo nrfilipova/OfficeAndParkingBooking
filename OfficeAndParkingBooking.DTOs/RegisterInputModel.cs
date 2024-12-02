@@ -12,7 +12,7 @@
         public string FullName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredErrorMessage)]
-        public string TeamName { get; set; } = string.Empty;
+        public int TeamId { get; set; }
 
         [Required(ErrorMessage = RequiredErrorMessage)]
         public string Email { get; set; } = string.Empty;

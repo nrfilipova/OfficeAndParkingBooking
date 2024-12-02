@@ -1,13 +1,13 @@
-﻿namespace OfficeAndParkingBooking.Services.Common
+﻿namespace OfficeAndParkingBooking.Services.Common.Validators
 {
     using System.ComponentModel.DataAnnotations;
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public class ParkingTime : ValidationAttribute
+    public class ParkingTimeValidator : ValidationAttribute
     {
         private readonly string _arrival;
 
-        public ParkingTime(string arrival)
+        public ParkingTimeValidator(string arrival)
         {
             _arrival = arrival;
         }
@@ -24,7 +24,7 @@
             }
 
             var arrivalValue = arrivalProp.GetValue(validationContext.ObjectInstance);
-            
+
             if (!DateTime.TryParse(value.ToString(), out departure) ||
                 !DateTime.TryParse(arrivalValue?.ToString(), out arrival))
             {
@@ -35,7 +35,7 @@
 
             if (departure < arrival.AddMinutes(15))
             {
-                return new ValidationResult("Departure must be at lest 15 min after arrival");
+                return new ValidationResult("Departure must be at least 15 min after arrival");
             }
 
             if (departure.TimeOfDay > endOfDay)

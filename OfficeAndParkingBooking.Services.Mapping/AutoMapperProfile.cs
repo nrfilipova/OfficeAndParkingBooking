@@ -30,13 +30,15 @@
 
             CreateMap<RoomModel, Room>().ReverseMap();
 
-            CreateMap<CarModel, Car>()
+            CreateMap<DropDownModel, Car>()
                  .ForPath(dest => dest.RegistrationPlate, opt => opt.MapFrom(x => x.Name))
                  .ForPath(dest => dest.Id, opt => opt.MapFrom(x => x.Id))
                 .ReverseMap();
 
             CreateMap<RegisterInputModel, Employee>()
                 .ForPath(dest => dest.UserName, opt => opt.MapFrom(x => x.Email));
+
+            CreateMap<DropDownModel, Team>();
         }
     }
 }

@@ -3,11 +3,11 @@
     using Data.Models;
     using DTOs;
     using Interfaces;
+    using Services.Common.Exceptions;
 
     using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging;
-    using OfficeAndParkingBooking.Services.Common;
 
     public class OfficeBookingService : IOfficeBookingService
     {
@@ -58,13 +58,13 @@
             if (bookingsForTheDay.Any(x => x.EmployeeId == id && x.Date == model.Date))
             {
                 _logger.LogError($"OfficeBookingService/AddBookingAsync: User with {id} cant' book twice for the same day - {model.Date}");
-                throw new Exception();
+                throw new BookingTwiceException();
             }
 
             if (bookingsForTheDay.Count() + 1 > roomCapacity)
             {
                 _logger.LogError($"OfficeBookingService/AddBookingAsync: Room with id - {model.RoomId} capacity {roomCapacity} exceeded");
-                throw new Exception();
+                throw new CapacityExceededException();
             }
 
             await _repository.AddAsync(currentBooking);

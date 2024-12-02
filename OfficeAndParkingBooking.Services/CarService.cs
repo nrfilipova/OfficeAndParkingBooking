@@ -19,13 +19,13 @@
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CarModel>> GetRegistrationPlatesAsync(string id)
+        public async Task<IEnumerable<DropDownModel>> GetRegistrationPlatesAsync(string id)
         {
             var plates = await _repository
                 .AllAsQueryable<Car>(x => x.EmployeeId == id, false)
                 .ToListAsync();
 
-            return _mapper.Map<IEnumerable<CarModel>>(plates);
+            return _mapper.Map<IEnumerable<DropDownModel>>(plates);
         }
 
         public async Task<IEnumerable<ParkingSpotsModel>> GetParkingSpotsAsync()

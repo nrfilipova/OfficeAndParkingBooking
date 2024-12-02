@@ -1,28 +1,44 @@
-import { LoginService } from './login.service';
+import { RegisterService } from "./register.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { LoginModel } from './login';
 import { Component, ViewChild } from "@angular/core";
 import { TextBoxComponent } from "@progress/kendo-angular-inputs";
 import { eyeIcon, SVGIcon } from "@progress/kendo-svg-icons";
+import { ITeam } from "./teammodel";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
-export class LoginComponent {
+export class RegisterComponent {
   @ViewChild('password') public textbox!: TextBoxComponent;
   public eyeIcon: SVGIcon = eyeIcon;
 
   public form: FormGroup = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
+    fullName : new FormControl('', Validators.required),
+    teamId: new FormControl('', Validators.required),
   });
   
+  public teams: ITeam[] =[];
+
   constructor(
-    private loginService: LoginService
+    private registerService: RegisterService
   ) {}
 
+  ngOnInit(): void{
+    this.loadTeams();
+  }
+
+  loadTeams(): void{
+    this.registerService.getTeams().subscribe({ 
+      next: (data: ITeam[]) => {
+        this.teams = data;
+      }
+    });
+  }
+  
   public ngAfterViewInit(): void {
     this.textbox.input.nativeElement.type = 'password';
   }
@@ -34,13 +50,11 @@ export class LoginComponent {
 
   onSubmit(): void {
     const formValues = this.form.value;
-    this.loginService.login(formValues).subscribe({
-      next: (response: LoginModel) => {
-        if (response.accessToken) {
-          localStorage.setItem('accessToken', response.accessToken);
-        }
-        alert("You are logged in :)");
-        this.form.reset();
+    this.registerService.register(formValues).subscribe({
+      next: () => {
+        this.teams = this.teams;
+        this.form.reset(); 
+        alert("Registration is successfull");
       }
     });
   }

@@ -2,7 +2,7 @@
 {
     using DTOs;
     using Services.Interfaces;
-    using Services.Common;
+    using Services.Common.Extentions;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -14,7 +14,7 @@
     {
         private readonly IParkingBookingService _parkingService;
 
-        public ParkingBookingController( IParkingBookingService carService)
+        public ParkingBookingController(IParkingBookingService carService)
         {
             _parkingService = carService;
         }
@@ -29,15 +29,8 @@
         [HttpPost]
         public async Task<IActionResult> CreateParkingBooking([FromBody] ParkingBookingInputModel model)
         {
-            try
-            {
-                string userId = User.Id();
-                await _parkingService.AddBookingAsync(model, userId);
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            string userId = User.Id();
+            await _parkingService.AddBookingAsync(model, userId);
 
             return Ok();
         }

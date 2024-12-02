@@ -1,6 +1,7 @@
 ﻿namespace OfficeAndParkingBooking.DTOs
 {
     using Services.Common;
+    using Services.Common.Validators;
     using static Services.Common.GlobalConstants.ErrorMessage;
     using static Services.Common.GlobalConstants.ParkingSpotConstants;
 
@@ -15,7 +16,7 @@
         public DateTime Arrival { get; set; }
 
         [DateTimeValidator(nameof(Arrival))]
-        [ParkingTime(nameof(Arrival))]
+        [ParkingTimeValidator(nameof(Arrival))]
         [Required(ErrorMessage = RequiredErrorMessage)]
         public DateTime Departure { get; set; }
 

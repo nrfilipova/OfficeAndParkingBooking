@@ -1,4 +1,4 @@
-﻿namespace OfficeAndParkingBooking.Services.Common
+﻿namespace OfficeAndParkingBooking.Services.Common.Extentions
 {
     using System.Security.Claims;
 

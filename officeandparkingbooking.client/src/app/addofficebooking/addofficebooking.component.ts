@@ -39,11 +39,12 @@ export class AddOfficeBookingComponent{
     formValues.date = format(formValues.date, "yyyy-MM-dd");
     
     this.bookingService.postOfficeBookings(formValues).subscribe({ 
-      next: (response) => {
-      this.rooms = this.rooms;
-      this.form.reset(); 
-    }
-  });
+        next: () => {
+        this.rooms = this.rooms;
+        this.form.reset(); 
+        alert("Booking added successfully");
+      }
+    });
   };
 
   public submitForm(): void {

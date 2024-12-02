@@ -1,4 +1,4 @@
-﻿namespace OfficeAndParkingBooking.Services.Common
+﻿namespace OfficeAndParkingBooking.Services.Common.Validators
 {
     using System.ComponentModel.DataAnnotations;
 

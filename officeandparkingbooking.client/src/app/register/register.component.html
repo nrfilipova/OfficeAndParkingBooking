@@ -1,7 +1,39 @@
 <div class="example-wrap">
     <form class="k-form k-form-md" [formGroup]="form" (ngSubmit) = "onSubmit()">
       <fieldset class="k-form-fieldset">
-        <legend class="k-form-legend">LOGIN</legend>
+        <legend class="k-form-legend">REGISTER</legend>
+
+        <kendo-formfield>
+            <kendo-label
+              labelCssClass="k-form-label"
+              for="fullName"
+              text="Full Name"
+            ></kendo-label>
+            <kendo-textbox
+              formControlName="fullName"
+              required
+            ></kendo-textbox>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label
+          labelCssClass="k-form-label"
+          for="teamId"
+          [optional]="false"
+          text="Team Name"
+        ></kendo-label>
+
+        <kendo-dropdownlist 
+        [data]="teams"
+        [textField]="'name'"
+        [valueField]="'id'"
+        formControlName = "teamId"
+        [valuePrimitive]="true"
+        ></kendo-dropdownlist>
+
+          <kendo-formhint>Please select a team</kendo-formhint>
+          <kendo-formerror>Error: Team field is required</kendo-formerror>
+        </kendo-formfield>
 
         <kendo-formfield>
           <kendo-label
@@ -14,7 +46,7 @@
             #email
             required
           ></kendo-textbox>
-
+          
           <kendo-formerror>Error: Not valid email format</kendo-formerror>
         </kendo-formfield>
 

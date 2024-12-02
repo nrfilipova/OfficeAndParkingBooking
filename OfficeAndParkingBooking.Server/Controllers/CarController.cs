@@ -1,6 +1,6 @@
 ﻿namespace OfficeAndParkingBooking.Server.Controllers
 {
-    using Services.Common;
+    using Services.Common.Extentions;
     using Services.Interfaces;
 
     using Microsoft.AspNetCore.Authorization;

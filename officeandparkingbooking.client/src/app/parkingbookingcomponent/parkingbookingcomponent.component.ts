@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IParkingeBookingModel} from './parkingbookingmodel';
 import { ParkingBookingService } from './parkingbooking.service';
+import { format } from "date-fns";
 
 @Component({
   selector: 'app-parkingbookingcomponent',
@@ -16,9 +17,9 @@ export class ParkingbookingcomponentComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    this.parkingBookingservice.getParkingBookings().subscribe((model) => {
-      this.parkingBookingData = model;
-    }
+      this.parkingBookingservice.getParkingBookings().subscribe((model) => {
+        this.parkingBookingData = model;
+      }
     );
   }
 }

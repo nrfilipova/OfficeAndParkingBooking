@@ -3,21 +3,25 @@
     using Data.Models;
     using DTOs;
     using Interfaces;
+    using Services.Common.Exceptions;
 
     using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
+    using Microsoft.Extensions.Logging;
 
     public class ParkingBookingService : IParkingBookingService
     {
         private readonly IRepository _repository;
         private readonly IMapper _mapper;
+        private readonly ILogger<ParkingBookingService> _logger;
 
-        public ParkingBookingService(IRepository repository, IMapper mapper)
+        public ParkingBookingService(IRepository repository, IMapper mapper, ILogger<ParkingBookingService> logger)
         {
             _repository = repository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<ParkingBookingAllModel>> GetParkingBookingBookingsAsync()
@@ -36,30 +40,12 @@
             var booking = _mapper.Map<ParkingBooking>(model);
             booking.EmployeeId = id;
             var isAvailable = ParkingSpotAvailable(model.SpotId, model.Arrival);
-            //var carToBook = await _repository.AllAsQueryable<Car>(x => x.Id == model.RegistrationPlateId, false).Select(x => x.RegistrationPlate).FirstOrDefaultAsync();
-            //var empCarsIds = await _repository.AllAsQueryable<Employee>(x => x.Id == model.EmployeeId, false).Include(x => x.Cars).SelectMany(x => x.Cars.Select(x => x.Id)).ToListAsync();
-
-            if (booking == null)
-            {
-                //TODO
-                throw new AutoMapperMappingException();
-            }
-
-            if (model.Departure.CompareTo(model.Arrival) <= 0)
-            {
-                throw new Exception();
-            }
 
             if (!isAvailable)
             {
-                //TODO sorry its not available
+                _logger.LogError($"ParkingBookingService/AddBookingAsync: Spot with id - {model.SpotId} is not available for arrival - {model.Arrival}, departure: {model.Departure}");
+                throw new ParkingSpotNotAvailableException();
             }
-
-            //if (!empCarsIds.Contains(carToBook.Id))
-            //{
-            //    //TODO
-            //    throw new Exception();
-            //}
 
             await _repository.AddAsync(booking);
             await _repository.SaveChangesAsync();

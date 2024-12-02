@@ -4,10 +4,10 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    public class CarModel
+    public class DropDownModel
     {
         [Required(ErrorMessage = RequiredErrorMessage)]
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
     }
 }

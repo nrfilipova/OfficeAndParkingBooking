@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -12,6 +12,7 @@ import { OfficeBookingcomponentComponent } from './officebookingcomponent/office
 import { AddOfficeBookingComponent } from './addofficebooking/addofficebooking.component';
 import { AddParkingbookingComponent } from './addparkingbooking/addparkingbooking.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 import { GridModule } from '@progress/kendo-angular-grid';
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
@@ -19,7 +20,7 @@ import { LabelModule } from "@progress/kendo-angular-label";
 import { InputsModule } from "@progress/kendo-angular-inputs";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
-
+import { GlobalErrorHandlerService } from './global-error-handler.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
     AddOfficeBookingComponent,
     AddParkingbookingComponent,
     LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,9 @@ import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
     ButtonsModule,
     DropDownsModule,
   ],
-  providers: [],
+  providers: [
+    {provide: ErrorHandler, useClass: GlobalErrorHandlerService}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

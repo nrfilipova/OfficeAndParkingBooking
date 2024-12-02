@@ -2,11 +2,10 @@
 {
     using DTOs;
     using Services.Interfaces;
-    using Services.Common;
+    using Services.Common.Extentions;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Cors;
 
     [ApiController]
     [Route("officeBooking")]
@@ -38,20 +37,8 @@
         [HttpPost]
         public async Task<IActionResult> CreateOfficeBooking([FromBody] OfficeBookingInputModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                string userId = User.Id();
-                await _officeBookingService.AddBookingAsync(model, userId);
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            string userId = User.Id();
+            await _officeBookingService.AddBookingAsync(model, userId);
 
             return Ok();
         }

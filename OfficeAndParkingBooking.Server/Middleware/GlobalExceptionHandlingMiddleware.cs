@@ -1,7 +1,10 @@
 ﻿namespace OfficeAndParkingBooking.Server.Middleware
 {
+    using Services.Common.Exceptions;
+
     using Microsoft.AspNetCore.Mvc;
-    using System.Net;
+    using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Text.Json;
 
     public class GlobalExceptionHandlingMiddleware : IMiddleware
@@ -21,14 +24,20 @@
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                var statusCode = ex switch
+                {
+                    BookingTwiceException => StatusCodes.Status400BadRequest,
+                    CapacityExceededException => StatusCodes.Status400BadRequest,
+                    ParkingSpotNotAvailableException => StatusCodes.Status400BadRequest,
+                    ValidationException => StatusCodes.Status400BadRequest,
+                    UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
+                    _ => StatusCodes.Status500InternalServerError
+                };
 
                 ProblemDetails details = new()
                 {
-                    Status = (int)HttpStatusCode.InternalServerError,
-                    Title = "Server error",
-                    Detail = ""
+                    Status = statusCode,
+                    Detail = ex.Message,
                 };
 
                 var json = JsonSerializer.Serialize(details);

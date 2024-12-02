@@ -5,6 +5,6 @@
     public interface ICarService
     {
         Task<IEnumerable<ParkingSpotsModel>> GetParkingSpotsAsync();
-        Task<IEnumerable<CarModel>> GetRegistrationPlatesAsync(string id);
+        Task<IEnumerable<DropDownModel>> GetRegistrationPlatesAsync(string id);
     }
 }
