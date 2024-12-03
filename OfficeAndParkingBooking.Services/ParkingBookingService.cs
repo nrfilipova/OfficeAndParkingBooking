@@ -53,7 +53,7 @@
                 throw new ParkingSpotNotAvailableException();
             }
 
-            if (booking != null)
+            if (bookings != null)
             {
                 _logger.LogError($"ParkingBookingService/AddBookingAsync: Allready booked for this car {model.RegistrationPlate}.");
                 throw new InvalidOperationException();

@@ -33,7 +33,7 @@
 
             var endOfDay = new TimeSpan(23, 59, 59);
 
-            if (departure.CompareTo(DateTime.Now) <= 0 || arrival.CompareTo(DateTime.Now) <= 0)
+            if (departure.CompareTo(DateTime.UtcNow) <= 0 || arrival.CompareTo(DateTime.UtcNow) <= 0)
             {
                 return new ValidationResult("Booking day can't be in the past");
             }
